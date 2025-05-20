@@ -145,26 +145,26 @@ def initialize():
 Test Commands
 '''
 
-# test = AppGroup('test', help='Testing commands')
+test = AppGroup('test', help='Testing commands')
 
-# @test.command("unit", help="Run all Unit tests")
-# def all_tests_command():
-#     sys.exit(pytest.main(["-k", "UnitTests"]))
+@test.command("unit", help="Run all Unit tests")
+def all_tests_command():
+    sys.exit(pytest.main(["-k", "UnitTests"]))
 
 
-# @test.command("int", help="Run all Integration tests")
-# def all_tests_command():
-#     sys.exit(pytest.main(["-k", "IntegrationTests"]))
+@test.command("int", help="Run all Integration tests")
+def all_tests_command():
+    sys.exit(pytest.main(["-k", "IntegrationTests"]))
 
-# @test.command("user", help="Run User tests")
-# @click.argument("type", default="all")
-# def user_tests_command(type):
-#     if type == "unit":
-#         sys.exit(pytest.main(["-k", "UserUnitTests"]))
-#     elif type == "int":
-#         sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
-#     else:
-#         sys.exit(pytest.main(["-k", "User"]))
+@test.command("user", help="Run User tests")
+@click.argument("type", default="all")
+def user_tests_command(type):
+    if type == "unit":
+        sys.exit(pytest.main(["-k", "UserUnitTests"]))
+    elif type == "int":
+        sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
+    else:
+        sys.exit(pytest.main(["-k", "User"]))
 
 
 # @test.command("student", help="Run Student tests")
@@ -277,7 +277,7 @@ Test Commands
 
 
 
-# app.cli.add_command(test)
+app.cli.add_command(test)
 
 
 # # ---- CLI commands ---- #

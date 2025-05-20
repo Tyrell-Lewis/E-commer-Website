@@ -10,7 +10,6 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
-    faculty = db.Column(db.String(120), nullable=False)
     user_type = db.Column(db.String(20), nullable=False)
     
     __mapper_args__ = {
@@ -18,12 +17,11 @@ class User(db.Model, UserMixin):
         "polymorphic_on": user_type,
     }
 
-    def __init__(self, username, firstname,lastname , password, email, faculty):
+    def __init__(self, username, firstname,lastname , password, email):
         self.username= username
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
-        self.faculty = faculty
         self.set_password(password)
 
     def get_json(self):
@@ -32,8 +30,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'firstname': self.firstname,
             'lastname': self.lastname,
-            'email': self.email,
-            'faculty': self.faculty
+            'email': self.email
         }
     
     def get_id(self):
