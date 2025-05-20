@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title%}{%endblock%}</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
         <style>
@@ -77,8 +79,8 @@
                 cursor: pointer;
             }
 
-            /* Sidenav Styles */
-            .sidenav {
+            /* unique-sidenav Styles */
+            .unique-sidenav {
                 height: 100%;
                 width: 0;
                 position: fixed;
@@ -91,7 +93,7 @@
                 padding-top: 60px;
             }
 
-            .sidenav a {
+            .unique-sidenav a {
                 padding: 8px 8px 8px 32px;
                 text-decoration: none;
                 font-size: 20px;
@@ -100,11 +102,11 @@
                 transition: 0.3s;
             }
 
-            .sidenav a:hover {
+            .unique-sidenav a:hover {
                 color: #f1f1f1;
             }
 
-            .sidenav .closebtn {
+            .unique-sidenav .closebtn {
                 position: absolute;
                 top: 0;
                 right: 25px;
@@ -228,6 +230,7 @@
             }
 
             .more-menu-btn {
+                width: 100%;
                 min-width: 100%;
                 color: #66757f;
                 cursor: pointer;
@@ -240,15 +243,18 @@
             }
 
             .more-menu-item:hover {
+                width: 100%;
                 background-color: #489fe5;
             }
 
             .more-menu-item:hover .more-menu-btn {
+                width: 100%;
                 color: #fff;
             }
 
             .more-btn:hover .more-dot,
             .show-more-menu .more-dot {
+                width: 100%;
                 background-color: #516471;
             }
 
@@ -259,7 +265,7 @@
             }
 
             /*For hamburger Menu*/
-            .slide {
+            .slide-unique {
                 margin-top: 13px;
             }
 
@@ -282,7 +288,7 @@
                 text-align: center;
             }
 
-            .burger {
+            .burger-unique {
                 position: relative;
                 width: 40px;
                 height: 30px;
@@ -292,11 +298,11 @@
                 padding-right: 5px;
             }
 
-            .burger input {
+            .burger-unique input {
                 display: none;
             }
 
-            .burger span {
+            .burger-unique div {
                 display: block;
                 position: absolute;
                 height: 4px;
@@ -309,22 +315,24 @@
                 transition: 0.25s ease-in-out;
             }
 
-            .burger span:nth-of-type(1) {
+            .burger-unique div:nth-of-type(1) {
                 top: 0px;
                 transform-origin: left center;
             }
 
-            .burger span:nth-of-type(2) {
+            .burger-unique div:nth-of-type(2) {
                 top: 50%;
                 transform: translateY(-50%);
                 transform-origin: left center;
             }
 
-            .burger span:nth-of-type(3) {
+            .burger-unique div:nth-of-type(3) {
                 top: 100%;
                 transform-origin: left center;
                 transform: translateY(-100%);
             }
+
+
 /* 
             @media (orientation: landscape) {
                         .profile-pic img {
@@ -419,7 +427,7 @@
 
     <body>
         <!-- Sidenav -->
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="unique-sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
             >&times;</a
             >
@@ -433,12 +441,14 @@
         <!-- Navbar -->
         <nav class="navbar">
             <!-- From Uiverse.io by Cevorob -->
-            <div class="slide">
-            <label class="burger" onclick="openNav()" for="burger">
-                <input type="checkbox" id="burger" />
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="slide-unique">
+            <label class="burger-unique" onclick="openNav()" for="burger-unique">
+                <input type="checkbox" id="burger-unique" />
+
+                 <div></div>
+                 <div></div>
+                 <div></div>
+   
             </label>
             </div>
             <!-- <div class="logo">
@@ -508,6 +518,7 @@
 
 
         <main>{% block content %}{% endblock %}</main>
+        
 
 
         {% with messages = get_flashed_messages(with_categories=true) %} {% if
@@ -599,7 +610,7 @@
             });
         </script>
 
-        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
         
     </body>
