@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask_login import login_required
 from App.models import Student
-from App.controllers import (calculate_ranks)
+# from App.controllers import (calculate_ranks)
 
 student_views = Blueprint('student_views',
                           __name__,

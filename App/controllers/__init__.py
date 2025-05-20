@@ -1,5 +1,6 @@
 from .user import *
 from .auth import *
+from .admin import *
 from .staff import *
 from .student import *
 from .karma import *

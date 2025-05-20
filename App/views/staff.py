@@ -4,13 +4,13 @@ import textwrap
 
 from App.models import Student, Staff, User, Review
 
-from App.controllers import (
-    get_student_by_UniId, get_student_by_id,
-    get_staff_by_id, get_staff_by_id, create_review, get_karma,
-    calculate_ranks, get_reviews, get_review, edit_review_work, delete_review_work,
-    create_comment, get_comment, get_comment_staff,
-    get_reply, create_reply, get_all_reviews, create_staff, get_student_review_index, get_karma_history,
-    like, dislike, update_staff_profile, get_all_students_json, get_staff_by_username, login_user)            #added get_reviews
+# from App.controllers import (
+#     get_student_by_UniId, get_student_by_id,
+#     get_staff_by_id, get_staff_by_id, create_review, get_karma,
+#     calculate_ranks, get_reviews, get_review, edit_review_work, delete_review_work,
+#     create_comment, get_comment, get_comment_staff,
+#     get_reply, create_reply, get_all_reviews, create_staff, get_student_review_index, get_karma_history,
+#     like, dislike, update_staff_profile, get_all_students_json, get_staff_by_username, login_user)            #added get_reviews
 
 
 staff_views = Blueprint('staff_views',
