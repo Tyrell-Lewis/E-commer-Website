@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Conduct Tracker - Request Recommendation</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff;
+        }
+        .logo {
+            background-color:#051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px;
+        }
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .nav-bar li {
+            padding: 0 20px;
+        }
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+        .recommendation-form {
+            max-width: 500px;
+            margin: 16vh auto 100px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            position: relative;
+            border: 2px solid #051d3c;
+        }
+        .recommendation-form h2 {
+            text-align: center;
+            color: #051d3c;
+        }
+        .recommendation-form input[type="text"],
+        .recommendation-form input[type="radio"],
+         .recommendation-form input[type="email"],
+          textarea{
+            width: calc(100% - 22px); /* Adjusted width to accommodate radio buttons */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: inline-block; /* Ensures inline display */
+        }
+        .recommendation-form button {
+            background-color: #051d3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+         margin: top 20px;x;
+        }
+
+       
+        .recommendation-form img{
+            width: 100px;
+            height: 100px;
+            display: flex;
+            position: relative;
+            right: -185px;
+        }
+
+      .recommendation-form input[type="radio"] {
+          display: inline-block; /* Change display to inline-block */
+      }
+
+      .recommendation-form label {
+          display: inline-block; /* Ensures labels and radio buttons appear in line */
+          margin-right: 15px; /* Add some space between label and radio button */
+      }
+
+      #jobRadio,#schoolRadio{
+        margin-left:120px;
+        margin-bottom:20px;
+      }
+
+      .recommendation-form select {
+          width: calc(100% - 22px); 
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          box-sizing: border-box;
+          display: inline-block; /* Ensures inline display */
+          font-size: 18px; /* Font size */
+          background-color: #fff; /* Background color */
+          color: #333; /* Text color */
+      }
+
+      /* Style select dropdown arrow */
+      .recommendation-form select::-ms-expand {
+          display: none; /* Hide default arrow in IE */
+      }
+
+       
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>UWI</h1>
+        </div>
+        <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+        <ul class="nav-bar">
+            <li><a href="/Student-Home">Home</a></li>
+            <li><a href="/student-page">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+
+<div class="recommendation-form">
+  <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Recommendation.png?raw=true" alt="Student Conduct Tracker">
+  <h2>Request Recommendation</h2>
+  <form id="recommendation-form" action="/request-recommendation" method="POST">
+    <select name="taggedStaffName" required>
+        {% for firstname, lastname in staff_names %}
+            <option value="{{ firstname }} {{ lastname }}">{{ firstname }} {{ lastname }}</option>
+        {% endfor %}
+    </select>
+      <input type="text" placeholder="Current Year Of Study" name="cyos" required>
+      <label id="jobRadio">
+          <input type="radio" name="recommendationType" value="Job" required onclick="toggleFields('job')"> Job
+      </label>
+      <label id="schoolRadio">
+          <input type="radio" name="recommendationType" value="School" required onclick="toggleFields('school')"> School
+      </label>
+      <div id="schoolFields" style="display: none;">
+          <input type="text" placeholder="School Name" name="schoolName">
+          <input type="text" placeholder="Program" name="program">
+          <input type="email" placeholder="School Email" name="schoolEmail">
+          <textarea placeholder="Details" name="schooldetails"></textarea>
+      </div>
+      <div id="jobFields" style="display: none;">
+          <input type="text" placeholder="Company Name" name="companyName">
+          <input type="text" placeholder="Position" name="position">
+          <input type="email" placeholder="Company Email" name="companyEmail">
+        <textarea placeholder="Details" name="jobdetails"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+  function toggleFields(type) {
+      if (type === 'school') {
+          document.getElementById('schoolFields').style.display = 'block';
+          document.getElementById('jobFields').style.display = 'none';
+
+          // Set input fields in schoolFields as required
+          document.getElementById('schoolName').setAttribute('required', true);
+          document.getElementById('program').setAttribute('required', true);
+          document.getElementById('schoolEmail').setAttribute('required', true);
+        document.getElementById('details').setAttribute('required', true);
+
+          // Remove required attribute from jobFields
+          document.getElementById('companyName').removeAttribute('required');
+          document.getElementById('position').removeAttribute('required');
+          document.getElementById('companyEmail').removeAttribute('required');
+        document.getElementById('details').removeAttribute('required');
+      } else if (type === 'job') {
+          document.getElementById('schoolFields').style.display = 'none';
+          document.getElementById('jobFields').style.display = 'block';
+
+          // Set input fields in jobFields as required
+          document.getElementById('companyName').setAttribute('required', true);
+          document.getElementById('position').setAttribute('required', true);
+          document.getElementById('companyEmail').setAttribute('required', true);
+        document.getElementById('details').setAttribute('required', true);
+
+          // Remove required attribute from schoolFields
+          document.getElementById('schoolName').removeAttribute('required');
+          document.getElementById('program').removeAttribute('required');
+          document.getElementById('schoolEmail').removeAttribute('required');
+        document.getElementById('details').removeAttribute('required');
+      }
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <title>Student Conduct Tracker - Student Achievements</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff;
+        }
+        .logo {
+            background-color:#051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px;
+        }
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .nav-bar li {
+            padding: 0 20px;
+        }
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+        .recommendation-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 100px; /* Adjust this value based on your header's height */
+        }
+        .recommendation-text {
+            font-size: 42px; /* Adjust based on your preference */
+            margin-left: 20px; /* Space between image and text */
+            transform-origin: center; /* Ensures the text rotates around its center */
+            background: -webkit-linear-gradient(#084f71, #051d3c); /* For Safari 5.1 to 6.0 */
+            background: linear-gradient(#084f71, #051d3c); /* Standard syntax; top to bottom gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; /* Makes the text color transparent so the gradient shows through */
+            -webkit-text-fill-color: transparent; /* Needed for Safari */
+            /* Assuming you want bold text */
+            color: #0056b3; /* Adjust the color to match your design */
+            font-family: "Titan One", sans-serif;
+        }
+        .recommendation-image {
+            height: 120px; /* Adjust based on your image */
+            width: 120px;
+        }
+        .student-card {
+            width: 100%;
+            max-width: 600px; /* Adjust this value based on your design */
+            padding: 20px;
+            display: flex;
+            position: relative; /* Positioned Ancestor */
+            align-items: center;
+            border: 2px solid #051d3c;
+            border-radius: 10px;
+            margin: 20px auto; /* Center the card */
+        }
+        .student-info {
+            flex: 1;
+            margin-right: 20px;
+
+        }
+        .student-info h3 {
+            margin: 0 0 5px;
+            font-size: 24px; /* Adjust based on your preference */
+        }
+        .student-info p {
+            margin: 0;
+            font-size: 18px; /* Adjust based on your preference */
+            color: #666;
+        }
+        .student-info span {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .description-box {
+            width: 100%;
+            background-color: #f9f9f9;
+           margin-top: 10px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+        }
+        .student-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .student-buttons button {
+            padding: 16px 34px; /* Adjust button padding */
+            background-color: #051d3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .student-buttons button.accept {
+            background-color: green; /* Green background for Accept button */
+        }
+        .student-buttons button.decline {
+            background-color: red; /* Red background for Decline button */
+        }
+        .points-dropdown {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            align-items: center;
+        }
+        .points-dropdown select {
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .points-dropdown label {
+    margin-right: 10px; /* Adjust the spacing between the label and the dropdown */
+    font-weight: bold; /* Make the label text bold */
+    color: #333; /* Change the color of the label text */
+}
+
+.student-info img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>UWI</h1>
+        </div>
+        <div class="logo2"><h2>Student Conduct Tracker</h2></div>   
+        {% if user.user_type == "student" %}
+        <ul class="nav-bar">
+            <li><a href="/Student-Home">Home</a></li>
+            <li><a href="/student-page">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            </ul>
+              {% else %}
+              <ul class="nav-bar">
+                <li><a href="/staffhome">Home</a></li>
+                <li><a href="/getStudentProfile/{{student.UniId}}">Student Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                </ul>
+              {% endif %}
+    </header>
+
+    <div class="recommendation-section">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/fixes/All%20Achivements.png?raw=true" alt="Recommendation Icon" class="recommendation-image">
+        <div class="recommendation-text">All Achievements for Student {{ student.firstname}} {{ student.lastname}}</div>
+      <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/fixes/All%20Achivements.png?raw=true" alt="Recommendation Icon" class="recommendation-image">
+    </div>
+
+    <!-- New student card -->
+  {% for accomplishment  in student.accomplishments %}
+    <div class="student-card">
+           
+        <div class="student-info">
+          
+            <h3>Topic: {{ accomplishment.topic }}</h3>
+             <!-- <p>Assigned Teacher id: {{ accomplishment.taggedStaffId }} </p> -->
+              <!-- <p>Points: {{ accomplishment.points }}</p>  -->
+            <div class="description-box">
+                <h3>Details:</h3>
+                <a> {{ accomplishment.details }}</a>
+              <br><br>
+              <h3>Status:</h3>
+              <a> {{ accomplishment.status}}</a>
+               <br><br>
+                <h3>Verification Status:</h3>
+                <a> {{ accomplishment.verified }}</a>
+            </div>
+          <br><br>
+     
+        </div>
+    </div>
+   {% endfor %}
+
+</body>
+</html>

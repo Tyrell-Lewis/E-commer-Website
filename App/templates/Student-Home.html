@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Conduct Tracker - Student Home</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background: #fff;
+  }
+  .logo {
+    background-color:#051d3c;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    padding: 10px 20px;
+    padding-left: 50px; /* This value can be increased or decreased to adjust the visible curve */
+    font-family: "Titan One", sans-serif;
+    font-weight: bold;
+  }
+  .logo h1 {
+    margin: 0;
+    color: white;
+    font-size: 30px; /* Adjust the font size as needed */
+  }
+  .nav-bar {
+    list-style: none;
+    display: flex;
+    padding: 10px 20px;
+    background-color: #051d3c;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    font-family: "Titan One", sans-serif;
+    font-weight: bold;
+  }
+  .nav-bar li {
+    padding: 0 20px; /* Adjust padding as needed */
+  }
+  .nav-bar li a {
+    text-decoration: none;
+    color: white;
+  }
+  .user-avatar {
+   position: absolute;
+    width: 40vw;
+      height: 40vw;
+      right: 32vw;
+      bottom: -28vw;
+   
+    
+    
+    background: url("https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true") center/cover no-repeat;
+  }
+
+
+.text, .text2, .text3 {
+  position: absolute; /* Absolute positioning to place text exactly where it's needed */
+   font-size: 4.5rem; /* Adjust as needed */
+   /* Assuming you want bold text */
+  color: #0056b3; /* Adjust the color to match your design */
+  font-family: "Titan One", sans-serif;
+  
+}
+
+.text {
+  /* "Student" */
+  top: 12vh; /* Adjust as needed */
+  left: 10vw; /* Adjust as needed */
+  color: #051d3c;
+}
+
+.text2 {
+  /* "Tracker" */
+  top: 19vh; /* Adjust to align with .text if necessary */
+  right: 20vw; /* Adjust as needed */
+  color: #051d3c;
+}
+
+.text3 {
+  /* "Conduct" - Rotate and position as needed */
+  top: 32vh; /* Adjust as needed */
+  left: 10vw; /* Centers the text */
+   /* Centers and rotates the text */
+  transform-origin: center; /* Ensures the text rotates around its center */
+  background: -webkit-linear-gradient(#084f71, #051d3c); /* For Safari 5.1 to 6.0 */
+  background: linear-gradient(#084f71, #051d3c); /* Standard syntax; top to bottom gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Makes the text color transparent so the gradient shows through */
+  -webkit-text-fill-color: transparent; /* Needed for Safari */
+}
+
+.logo2{
+    position: absolute;
+    left: 140px;
+    color: #051d3c;
+}
+
+.gradient-box {
+  border: 1px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  border-color:#051d3c;
+  border-radius: 30px; /* This will give the box rounded corners */
+  display: flex;
+  justify-content: space-around; /* Distributes space evenly between images */
+  padding: 20px;
+  width: 80%; /* Same width as .main-content */
+  margin: 300px auto 50px; /* Spacing between the text and the box */
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the opacity as needed */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for depth */
+}
+.image-link {
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  width: 100px; /* Set your desired width */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  text-align: center; /* Center-align the text */
+  margin: 0 10px; /* Add some horizontal margin if needed */
+}
+
+.image-link img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px; /* Provide space between the image and the text */
+}
+
+.text4 {
+  font-family: "Titan One", sans-serif;
+  color: #0056b3; 
+  font-size: 24px;
+  margin-top: 4px; /* Adjust the space between the image and the text */
+}
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 9999; /* Ensure it appears above other content */
+    font-size: 24px;
+}
+
+
+
+.image-link:hover {
+  transform: scale(1.1); /* Scales up the image slightly on hover */
+  cursor: pointer;
+}
+
+html, body {
+  height: 100%; /* Make sure the html and body are at least the height of the viewport */
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Stack child elements vertically */
+}
+
+body > *:not(footer) {
+  flex: 1; /* This will make the main content grow to fill available space */
+}
+
+.site-footer {
+  background-color: #051d3c;
+  color: white;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  margin-top: auto;
+  /* Make sure the footer is not a flexbox if you want the text to be traditionally block-aligned */
+}
+
+/* Add padding inside the footer */
+.site-footer .container {
+  max-width: 1200px;
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between; /* To separate contact and social media to each side */
+}
+
+@media (min-width: 1920px) and (max-height: 1080px) {
+  .text, .text2, .text3 {
+    font-size: 130px;  /* Adjust font size as needed */
+  }
+
+  .user-avatar {
+    width: 732px;
+    height: 646px;
+    right: 641px;
+    bottom: -410px;
+  }
+  .text {
+  /* "Student" */
+  top: 140px; /* Adjust as needed */
+  left: 100px; /* Adjust as needed */
+  }
+  .text2 {
+  /* "Student" */
+  top: 230px; /* Adjust to align with .text if necessary */
+  right: 180px; /* Adjust as needed */
+  }
+  .text3{
+  /* "Student" */
+  top: 340px; /* Adjust as needed */
+  left: 100px; /* Centers the text */
+  }
+}
+
+/* 1600x900 */
+@media (min-width: 1600px) and (max-height: 900px) {
+  .text, .text2, .text3 {
+    font-size: 100px; 
+  }
+  .user-avatar {
+    width: 40vw;
+    height: 40vw;
+    right: 32vw;
+    bottom: -28vw;
+  }
+  .text {
+  /* "Student" */
+  top: 120px; /* Adjust as needed */
+  left: 100px; 
+  }
+  .text2 {
+  /* "Student" */
+  top: 170px; /* Adjust as needed */
+  left: 1000px; 
+  }
+  .text3{
+  /* "Conduct" */
+  top: 240px; /* Adjust as needed */
+  left: 100px; 
+  }
+}
+
+/* 1280x1720 */
+@media (min-width: 1280px) and (max-height: 720px) {
+  .text, .text2, .text3 {
+    font-size: 4.5rem;
+  }
+
+  .user-avatar {
+    width: 39vw;
+    height: 38vw;
+    right: 35vw;
+    bottom: -30vw;
+  }
+  .text {
+  /* "Student" */
+  top: 120px; /* Adjust as needed */
+  left: 100px; 
+  }
+  .text2 {
+  /* "Student" */
+    top: 24vh;
+    left: 61vw;
+  }
+  .text3{
+  /* "Conduct" */
+  top: 240px; /* Adjust as needed */
+  left: 100px; 
+  }
+}
+  @media (min-width: 3840px) and (max-height: 2160px) {
+    .text, .text2, .text3 {
+      font-size: 14.5rem;
+    }
+
+    .user-avatar {
+      width: 39vw;
+      height: 38vw;
+      right: 32vw;
+      bottom: -20vw;
+    }
+    .text {
+    /* "Student" */
+    top: 20vh; /* Adjust as needed */
+      left: 8vw;
+    }
+    .text2 {
+    /* "Student" */
+      top: 26vh;
+      left: 64vw;
+    }
+    .text3{
+    /* "Conduct" */
+      top: 33vh;
+      left: 8vw;
+      
+    }
+  }
+
+.icon-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: red; /* Change the background color to red */
+  padding: 5px 10px;
+  border-radius: 50%;
+}
+  .icon-container {
+    position: relative;
+    width: 100%;
+ 
+  }
+
+  .icon-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: red; /* Change the background color to red */
+    padding: 5px 10px;
+    border-radius: 50%;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>UWI</h1> <!-- Updated to have text inside -->
+  </div>
+  <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+  <ul class="nav-bar">
+    <!-- Adjusted to only have the left side curved -->
+    <li><a href="/Student-Home">Home</a></li>
+    <li><a href="/student-page">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+  <div class="user-avatar"></div> <!-- Changed to a div with background for better control -->
+</header>
+
+<main class="main-content">
+<span class="text">Student </span>
+<span class="text2">Tracker</span>
+  <span class="text3">Conduct</span>
+
+
+
+</main>
+
+<div class="gradient-box">
+  <a href="/propose-achievement" class="image-link">
+    <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Achivement.png?raw=true" alt="Student Page">
+    <span class="text4"> Propose Achievement </span>
+  </a>
+  <a href="/upload-transcript" class="image-link">
+    <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Upload.png?raw=true" alt="Academic Journey">
+    <span class="text4">Academic Journey</span>
+  </a>
+  <a href="/leaderboard" class="image-link">
+    <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/fixes/leaderboard.png?raw=true" alt="Leaderboard">
+    <span class="text4"> Leaderboard </span>
+  </a>
+  <a href="/student-page" class="image-link">
+    <div class="icon-container">
+      <span class="icon-number">{{ totalNotis  }}</span>
+    </div>
+    <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/fixes/Student%20Profile.png?raw=true" alt="Leaderboard">   
+    <span class="text4"> Student Profile  </span>
+  </a>
+</div>
+
+
+</body>
+
+{% if student %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Get the user name passed from Flask
+      var userName = "{{ student.fullname }}";
+      
+      // Create a popup message element
+      var popup = document.createElement('div');
+      popup.textContent = 'Welcome, ' + userName + '!';
+      popup.className = 'popup';
+      
+      // Append the popup to the body
+      document.body.appendChild(popup);
+      
+      // Remove the popup after 3 seconds
+      setTimeout(function () {
+          popup.style.display = 'none';
+      }, 5000);
+  });
+</script>
+{% endif %}
+
+</html>

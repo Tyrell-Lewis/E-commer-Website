@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <title>Student Conduct Tracker - Student Search Result</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff;
+        }
+        .logo {
+            background-color:#051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px;
+        }
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .nav-bar li {
+            padding: 0 20px;
+        }
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+        .recommendation-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 100px; /* Adjust this value based on your header's height */
+        }
+        .recommendation-text {
+            font-size: 42px; /* Adjust based on your preference */
+            margin-left: 20px; /* Space between image and text */
+            transform-origin: center; /* Ensures the text rotates around its center */
+            background: -webkit-linear-gradient(#084f71, #051d3c); /* For Safari 5.1 to 6.0 */
+            background: linear-gradient(#084f71, #051d3c); /* Standard syntax; top to bottom gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; /* Makes the text color transparent so the gradient shows through */
+            -webkit-text-fill-color: transparent; /* Needed for Safari */
+            /* Assuming you want bold text */
+            color: #0056b3; /* Adjust the color to match your design */
+            font-family: "Titan One", sans-serif;
+        }
+        .recommendation-image {
+            height: 120px; /* Adjust based on your image */
+            width: 120px;
+        }
+        .student-card {
+            width: 150%;
+            max-width: 1200px; /* Adjust this value based on your design */
+            padding: 20px;
+            display: flex;
+            position: relative; /* Positioned Ancestor */
+            align-items: center;
+            border: 2px solid #051d3c;
+            border-radius: 10px;
+            margin: 20px auto; /* Center the card */
+        }
+        .student-info {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .student-info h3 {
+            margin: 0 0 5px;
+            font-size: 24px; /* Adjust based on your preference */
+        }
+        .student-info p {
+            margin: 0;
+            font-size: 18px; /* Adjust based on your preference */
+            color: #666;
+        }
+        .student-info span {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .student-buttons {
+            position: absolute;
+            bottom: 35px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .student-buttons button {
+            padding: 24px 28px; /* Adjust button padding */
+            background-color: #051d3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            /* Adjust button positions for smaller screens */
+            .student-buttons {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+        .student-buttons button.accept {
+            background-color: green; /* Green background for Accept button */
+        }
+        .student-buttons button.decline {
+            background-color: red; /* Red background for Decline button */
+             }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>UWI</h1>
+        </div>
+        <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+        <ul class="nav-bar">
+            <li><a href="/staffhome">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+
+    <div class="recommendation-section">
+
+        <div class="recommendation-text">Student Search Result</div>
+
+    </div>
+
+    <!-- New student card -->
+    {% for student  in students %}
+    <div class="student-card">
+        <div class="student-info">
+            <h3>Name: {{ student.firstname }} {{ student.lastname }}</h3>
+            <p>Student ID: {{ student.UniId }} </p>
+            <p>Degree: {{ student.degree }}</p>
+        </div>
+        <div class="student-buttons">
+            <form method="GET" action="/getStudentProfile/{{student.UniId}}">
+                <button href="/getStudentProfile/{{student.UniId}}">Student Profile</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- Rest of your content -->
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Conduct Tracker - Admin Main</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+  <link rel="stylesheet" href="../static/css/adminMain.css">
+</head>
+<body>
+  <header class="banner">
+    <h1>Student Conduct Tracker</h1>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="#csvfiles">Upload CSV Files</a></li>
+      <li><a href="#editstudent">Edit Student Info</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    
+    <h2>Welcome ADMIN to the Student Conduct Tracker</h2><br>
+    <p>Here you can: </p><br>
+    <ul>
+      <li>Insert the CSV files of both student and system to populate the database of the system.</li>
+      <li>Search for and edit current student info.</li>
+    </ul>
+  </div>
+
+  <div id="csvfiles" class="csvfiles">
+    <h2>Upload CSV Files</h2>
+    
+    <div class="upload-container">
+      <div class="studentcsv">
+        <h3>Student CSV</h3>
+        <form class="form">
+          <span class="form-title">Upload your file</span>
+          <p class="form-paragraph">
+              File should be in CSV format
+            </p>
+           <label for="file-input" class="drop-container">
+          <span class="drop-title">Drop files here</span>
+          <input type="file"  required="" id="file-input">
+        </label>
+        </form>
+      </div>
+  
+      <div class="staffcsv">
+        <h3>Staff CSV</h3>
+
+        <form class="form">
+          <span class="form-title">Upload your file</span>
+          <p class="form-paragraph">
+              File should be in CSV format
+            </p>
+           <label for="file-input" class="drop-container">
+          <span class="drop-title">Drop files here</span>
+          <input type="file"  required="" id="file-input">
+        </label>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="editStudent" id="editstudent">
+    <h2>Student Search</h2><br><br><br>
+
+    <div class="input-container">
+      <input type="text" name="text" class="input" placeholder="Search by Name...">
+      <span class="icon"> 
+        <svg width="19px" height="19px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </span>
+    </div>
+
+    <div class="studentTable">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Degree</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tr>
+          <!-- Table rows will be dynamically populated with data -->
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</body>
+</html>
+
+
+<script>
+// Get the file inputs
+const studentFileInput = document.getElementById('student-file');
+const staffFileInput = document.getElementById('staff-file');
+
+// Add event listeners to detect file selection
+studentFileInput.addEventListener('change', showStudentFileName);
+staffFileInput.addEventListener('change', showStaffFileName);
+
+function showStudentFileName(event) {
+  // Get the selected file
+  const file = event.target.files[0];
+  
+  // Display the file name in the uploaded-file div
+  const uploadedStudentFileDiv = document.getElementById('uploaded-student-file');
+  uploadedStudentFileDiv.textContent = `Uploaded student file: ${file.name}`;
+}
+
+function showStaffFileName(event) {
+  // Get the selected file
+  const file = event.target.files[0];
+  
+  // Display the file name in the uploaded-file div
+  const uploadedStaffFileDiv = document.getElementById('uploaded-staff-file');
+  uploadedStaffFileDiv.textContent = `Uploaded staff file: ${file.name}`;
+}
+
+
+</script>

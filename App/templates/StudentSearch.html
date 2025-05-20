@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Conduct Tracker - Student Search </title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff;
+        }
+        .logo {
+            background-color:#051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px;
+        }
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+        .nav-bar li {
+            padding: 0 20px;
+        }
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+        .recommendation-form {
+            max-width: 500px;
+            margin: 200px auto 100px;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #051d3c;
+            border-radius: 8px;
+            position: relative;
+        }
+        .recommendation-form h2 {
+            text-align: center;
+            color: #051d3c;
+        }
+        .recommendation-form input,
+        .recommendation-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .recommendation-form img{
+            width: 100px;
+            height: 100px;
+            display: flex;
+            position: relative;
+            right: -185px;
+        }
+
+        /* Add the following styles */
+        .deduct-points-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .deduct-points-section label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .deduct-points-section select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Adjust button styles to add some space */
+        .recommendation-form button {
+            background-color: #051d3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px; /* Add some margin at the top */
+        }
+
+      /* Add styles for the message container */
+      .message-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        margin-top: 10px;
+      }
+
+      /* Add styles for the message box */
+      .message {
+        color: red;
+          border: 2px solid #051d3c;
+          padding: 10px;
+          border-radius: 8px;
+          text-align: center;
+      }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>UWI</h1>
+        </div>
+        <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+        <ul class="nav-bar">
+            <li><a href="/staffhome">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+
+    <div class="recommendation-form">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/SS.png?raw=true" alt="Student Conduct Tracker">
+        <h2>Student Search</h2>
+        <form class = "sm" action="/searchStudent" method="get">
+          <input type="text" id="studentID" name="studentID" placeholder="Student ID" oninput="fetchStudentName()">
+            <input type="text" id="name" name="name" placeholder="Name">
+            <input type="text" id="faculty" name="faculty" placeholder="Faculty" >
+            <input type="text" id="degree" name="degree" placeholder="Degree" >
+        <button type="submit">Search</button>
+          {% if message %}
+          <div class="message-container">
+              <div class="message">
+                  <p>{{ message }}</p>
+              </div>
+          </div>
+          {% endif %}
+</div>
+  
+</form>
+</body>
+  <script>
+    function fetchStudentName() {
+        const studentID = document.getElementById('studentID').value;
+
+        // Send AJAX request to Flask server
+        fetch('/get_student_name', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ studentID: studentID })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update name input field with retrieved student name
+            document.getElementById('name').value = data.studentName;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UWI STA Document</title>
+    <style>
+        @page {
+            size: letter portrait;
+        }
+        .body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            line-height: 1.6;
+            width: auto;
+        }
+        .header{
+            font-family:'Times New Roman', Times, serif;
+        }
+        .headers {
+            text-align: center;
+            margin: 0px;
+            font-size: 6mm;
+        }
+        #school, #faculty{
+            font-size: 5mm;
+        }
+        #email{
+            font-size: 4mm;
+        }
+        #logo {
+            margin-top: 50px;
+            text-align: center;
+            height: 150px;
+            width: 250px;
+        }
+
+        .separator{
+            border-top: 1px solid black;
+        }
+        .recommendation{
+            font-size: 4mm;
+        }
+        .signature{
+            margin: 0px;
+            padding: 0px;
+        }
+        .signatureImage{
+            margin-top: 0px;
+            padding-top: 0px;
+            width: 190px;
+            height: 80px;
+        }
+    </style>
+</head>
+{% block content %}
+<body class="body">
+    <div class="header">
+        <img id="logo" src="images/UWI-logo.jpg" alt="UWI Logo" >
+        <h1 class="headers">UNIVERSITY OF THE WEST INDIES</h1>
+        <h4 id="school" class="headers">ST.AUGUSTINE, TRINIDAD AND TOBAGO, WEST INIDIES</h4>
+        <h4 id="faculty" class="headers" style="font-weight: bold;">{{staff.faculty}}</h4>
+        <h4 id="email" class="headers">E-mail:{{staff.email}}</h5>
+    </div>
+    <hr class="separator">
+    
+    <div class="main">
+            <div class="recommendation">
+                <p>Date: {{current_date}}</p>
+                {% if recommendation.recommendation_type == "jobRecommendation" %}
+                    <p>To: {{recommendation.company}}</p>
+                {% endif %}
+                {% if recommendation.recommendation_type == "schoolRecommendation" %}
+                    <p>To: {{recommendation.school}}</p>
+                {% endif %}
+                <p>{{details}}</p>
+            
+                <p class="signature">With regards,</p>
+                <img src="{{base64_signature}}"alt="Signature" class="signatureImage">
+                <p class="signature">{{staff.firstname + " " + staff.lastname}}</p>
+            </div>
+            
+    </div>
+</body>
+{% endblock %}
+</html>

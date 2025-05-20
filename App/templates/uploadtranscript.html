@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Conduct Tracker - Upload Transcript</title>
+    <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff;
+        }
+
+        .logo {
+            background-color: #051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px;
+        }
+
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+
+        .nav-bar li {
+            padding: 0 20px;
+        }
+
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+
+        .form-title {
+            color: #000000;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        .form-paragraph {
+            margin-top: 10px;
+            font-size: 0.9375rem;
+            color: rgb(105, 105, 105);
+        }
+
+        .drop-container {
+            background-color: #fff;
+            position: relative;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            margin-top: 2.1875rem;
+            border-radius: 10px;
+            border: 2px dashed rgb(171, 202, 255);
+            color: #444;
+            cursor: pointer;
+            transition: background .2s ease-in-out, border .2s ease-in-out;
+        }
+
+        .drop-container:hover {
+            background: rgba(0, 140, 255, 0.164);
+            border-color: rgba(17, 17, 17, 0.616);
+        }
+
+        .drop-container:hover .drop-title {
+            color: #222;
+        }
+
+        .drop-title {
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            transition: color .2s ease-in-out;
+        }
+
+        #file-input {
+            width: 350px;
+            max-width: 100%;
+            color: #444;
+            padding: 2px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid rgba(8, 8, 8, 0.288);
+        }
+
+        #file-input::file-selector-button {
+            margin-right: 20px;
+            border: none;
+            background: #084cdf;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+        }
+
+        #file-input::file-selector-button:hover {
+            background: #0d45a5;
+        }
+
+      .upload-image {
+          max-width: 200px; /* Adjust as needed */
+          margin: 20px auto 0; 
+      }
+
+      .upload-heading {
+          margin: 10px auto; /* Centered horizontally */
+          text-align: center; /* Centering the text */
+      }
+
+      .top-container {
+          text-align: center;
+          margin-top: -35px; /* Adjust as needed */
+      }
+
+      .submit {
+          background-color: #051d3c;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          width: 40%;
+        margin-top:30px;
+      }
+
+      .container {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+          padding: 20px;
+          max-width: 850px; /* Set a maximum width for the container */
+        width:65%;
+        margin-right:20%;
+        margin-left: -10%;
+        margin-top:-5%;
+      }
+
+      .wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        margin-top:5%;
+      }
+
+
+      .upload-trans {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: #f9f9f9;
+          border-radius: 20px;
+          max-width: 650px; 
+      }
+
+
+      .form-container {
+          background-color: #fff;
+          box-shadow: 0 10px 60px rgb(218, 229, 255);
+          border: 1px solid rgb(159, 159, 160);
+          border-radius: 20px;
+          padding: 2rem .7rem .7rem .7rem;
+          text-align: center;
+          font-size: 1.125rem;
+          height: 300px;
+          width: 100%; /* Make the form container take full width */
+          max-width: 500px; /* Limit the width if needed */
+      }
+
+      .content {
+          font-size: 1.4rem; /* Adjust the font size as needed */
+      }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>UWI</h1>
+        </div>
+        <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+        <ul class="nav-bar">
+            <li><a href="/Student-Home">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+  <div class="wrapper">
+  <div class="container">
+  <div class="content">
+  <h2>Unlock Your Academic Journey!</h2>
+    <p>Welcome to our student conduct tracker platform. Uploading your transcript is the key to unlocking a wealth of benefits:</p>
+    <ol>
+      <li><b>Track Your Progress</b>: By sharing your academic records, you can keep tabs on your performance over time. See your achievements and identify areas for improvement.</li><br>
+      <li><b>Earn Recognition</b>: Your hard work deserves recognition! Upload your transcript to earn points and rewards within our platform.</li><br>
+      <li><b>Personalized Support</b>: With your transcript data, we can offer personalized support and resources tailored to your academic needs.</li>
+    </ol>
+
+    <p>Rest assured, your privacy and security are our top priorities. Your data is handled with the utmost care and is only used to enhance your experience on our platform.</p>
+    
+    <p>Don't miss out on the opportunity to take control of your academic journey. Click the "Upload Transcript" button and embark on the path to success today!</p>
+  </div>
+  </div>
+  
+  <div class="upload-trans">
+  <div class="top-container">
+      <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Upload.png?raw=true" alt="Upload Transcript" class="upload-image">
+      <h2 class="upload-heading">Upload Transcript</h2>
+  </div>
+    <div class="form-container">
+        <form class="form">
+            <span class="form-title">Upload your file</span>
+            <p class="form-paragraph">File should be a PDF</p>
+            <label for="file-input" class="drop-container">
+                <span class="drop-title">Drop files here</span>
+                or
+                <input type="file" id="pdf-upload" name="myfile" accept=".pdf">
+            </label>
+        </form>
+
+      <form method="GET" action="/checkPDF">
+          <button id="submit-btn" class="submit" href="/checkPDF" disabled>Submit</button>
+      </form>
+      
+    </div>
+  </div>
+  </div>
+  <script>
+      document.getElementById('pdf-upload').addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          const submitBtn = document.getElementById('submit-btn');
+
+          if (file) {
+              submitBtn.removeAttribute('disabled');
+          }
+      });
+
+      document.getElementById('submit-btn').addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent form submission
+
+          const fileInput = document.getElementById('pdf-upload');
+          const file = fileInput.files[0];
+          const formData = new FormData();
+          formData.append('file', file);
+
+          fetch('/upload_transcript', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => {
+              if (response.ok) {
+                  return response.text(); // Assuming the response is text
+              } else {
+                  throw new Error('File upload failed');
+              }
+          })
+          .then(data => {
+              console.log('File uploaded successfully:', data);
+              // Redirect to the checkPDF endpoint
+              window.location.href = '/checkPDF';
+          })
+          .catch(error => {
+              console.error('Error uploading file:', error.message);
+              // Optionally, display an error message to the user
+          });
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lilita+One&family=Titan+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Conduct Tracker - Profile</title>
+  <link rel="icon" href="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fix the header at the top of the screen */
+            top: 0; /* Align the header at the top of the screen */
+            width: 100%; /* Make the header span the entire width */
+            z-index: 999; /* Ensure the header appears above other content */
+            background: #fff;
+        }
+
+        .logo {
+            background-color: #051d3c;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 20px;
+            padding-left: 50px; /* This value can be increased or decreased to adjust the visible curve */
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            margin: 0;
+            color: white;
+            font-size: 30px; /* Adjust the font size as needed */
+        }
+
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            padding: 10px 20px;
+            background-color: #051d3c;
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+            font-family: "Titan One", sans-serif;
+            font-weight: bold;
+        }
+
+        .nav-bar li {
+            padding: 0 20px; /* Adjust padding as needed */
+        }
+
+        .nav-bar li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo2 {
+            position: absolute;
+            left: 140px;
+            color: #051d3c;
+        }
+      .flex.items-center.space-x-4.mb-4 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: -3rem; /* Adjust this value as needed */
+      }
+      .student-info-card {
+          width: 400px;
+          max-width: 90%; /* Ensure the card doesn't exceed 90% of the viewport width */
+          height: 510px; /* Allow the height to adjust based on content */
+          padding: 1.5rem; /* Use rem units for padding */
+          background-color: #fff;
+          border-radius: 10px;
+          margin: 220px auto 0; /* Center the card horizontally */
+          border: 2px solid #051d3c;
+          position: relative;
+          font-family: "Kanit", sans-serif;
+          font-weight: 1000;
+          font-style: italic;
+          color: #051d3c;
+          font-size: 1.25rem; /* Use rem units for font size */
+        right: 480px;
+      }
+      .student-info-container {
+          max-height: 500px; /* Adjust this value as needed */
+          overflow-y: auto; /* Enable vertical scrolling */
+      }
+
+      .student-info {
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+         align-items: flex-start;
+      }
+
+      .student-info .block {
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+      }
+
+      .student-info .block img {
+          width: 1.25rem; /* Use rem units for image dimensions */
+          height: 1.25rem;
+          margin-right: 0.5rem;
+      }
+
+      .user-avatar {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          margin-bottom: 10px;
+      }
+
+      .edit-button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          transform: translate(50%, -50%);
+          background-color: #051d3c;
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 14px;
+          cursor: pointer;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+      }
+
+      .relative:hover .edit-button {
+          opacity: 1;
+      }
+
+
+.student-info span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+        .badge-section img {
+            width: 50px; /* Adjust badge size */
+            height: 50px; /* Adjust badge size */
+            margin-right: 5px; /* Adjust spacing between badges */
+        }
+        
+        .student-name {
+  position: absolute; /* Position the student name absolutely */
+  top: 100px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  font-family: 'Titan One', sans-serif; /* Use the desired font */
+  font-size: 100px; /* Adjust the font size as needed */
+  color: #0056b3; /* Adjust the color to match your design */
+}
+
+.text, .text3 {
+  position: absolute; /* Absolute positioning to place text exactly where it's needed */
+  font-size: 100px; /* Adjust as needed */
+   /* Assuming you want bold text */
+  color: #0056b3; /* Adjust the color to match your design */
+  font-family: "Titan One", sans-serif;
+  
+}
+
+.text {
+  /* "Student" */
+  top: 100px; /* Adjust as needed */
+  left: 250px; /* Adjust as needed */
+  color: #051d3c;
+}
+
+.text3 {
+  /* "Conduct" - Rotate and position as needed */
+  top: 100px; /* Adjust as needed */
+  left: 750px; /* Centers the text */
+   /* Centers and rotates the text */
+  transform-origin: center; /* Ensures the text rotates around its center */
+  background: -webkit-linear-gradient(#084f71, #051d3c); /* For Safari 5.1 to 6.0 */
+  background: linear-gradient(#084f71, #051d3c); /* Standard syntax; top to bottom gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Makes the text color transparent so the gradient shows through */
+  -webkit-text-fill-color: transparent; /* Needed for Safari */
+}
+
+.mini-icon {
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size */
+    margin-right: 5px; /* Adjust spacing between icon and text */
+}
+.name{
+    position:absolute;
+    left: 150px;
+    top: 70px;
+}
+
+.badges-container {
+    position:absolute;
+    top: 0px;
+    right: -950px; /* Center items horizontally */
+    
+}
+
+.badges-card {
+    position: relative; /* Ensure relative positioning */
+    width: 800px; /* Adjust card width */
+    height: 200px; /* Adjust card height */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 20px; /* Adjust margin between cards */
+    border: 2px solid #051d3c; /* Add border */
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #051d3c;
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: space-between; /* Space out children evenly */
+    align-items: center; /* Align items horizontally */
+    position: relative; /* Ensure relative positioning */
+}
+.badge-section {
+            display: flex; /* Use flexbox to arrange badge images horizontally */
+            justify-content: center; /* Center badge images horizontally */
+            flex-wrap: wrap;
+        }
+
+.badge-section img {
+            width: 130px; /* Adjust badge width */
+            height: 130px; /* Adjust badge height */
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+.badgestitle {
+    text-align: center; /* Center the text horizontally */
+    font-weight: bold; /* Optionally make the text bold */
+    margin-bottom: 5px; /* Adjust margin as needed */
+}
+
+
+.request-card {
+    width: 800px; /* Adjust card width */
+    height: 200px; /* Adjust card height */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 20px; /* Adjust margin between cards */
+    border: 2px solid #051d3c; /* Add border */
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #051d3c;
+    display: flex;
+   justify-content: center;
+   position:absolute;
+    top: 300px;
+    right: -950px; /* Center items horizontally */
+}
+
+.reco-section2-image{
+    width: 250px;
+    height: 200px;
+    
+}
+.reco-section2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+
+}
+.reco-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+.badge-section3 img {
+            width: 120px; /* Adjust badge width */
+            height: 120px; /* Adjust badge height */
+            margin-right: 55px; /* Adjust spacing between badges */
+            display: flex; /* Use flexbox to arrange badge images horizontally */
+            justify-content: center; /* Center badge images horizontally */
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .badge-section4 img {
+            width: 140px; /* Adjust badge width */
+            height: 140px; /* Adjust badge height */
+            margin-right: 55px; /* Adjust spacing between badges */
+            display: flex; /* Use flexbox to arrange badge images horizontally */
+            justify-content: center; /* Center badge images horizontally */
+            flex-wrap: wrap;
+           
+         
+        }
+
+      .rcontainer {
+          display: flex;
+          justify-content: space-between; /* Distribute the containers evenly */
+          align-items: flex-start; /* Align containers at the top */
+      }
+
+      .reviews-container,
+      .reviews-container2,
+      .reviews-container3,
+      .reviews-container4{
+          width: 470px;
+        margin-top: 120px;
+        margin-right: 50px;
+        margin-bottom: 80px;
+        margin-left: 20px;
+      }
+
+      
+
+.reviews-card{
+    width: 100%; /* Adjust card width */
+    height: 200px; /* Adjust card height */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 3px solid #051d3c;  /* Add border */
+    font-family: "Kanit", sans-serif;
+    font-weight: 50;
+    font-style: italic;
+    color: #051d3c;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+  flex-direction: column;
+}
+.arrow-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px; /* Adjust spacing between the arrow icon and text */
+}
+.view-all-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #0056b3; /* Adjust the color as needed */
+}
+
+.review {
+    margin-bottom: 20px; /* Adjust margin between each review */
+    
+    padding: 20px; /* Add padding to the entire review */
+    
+    overflow: hidden; /* Prevent content from overflowing */
+}
+
+.left, .right {
+    flex: 10;
+    margin-right: 200px;
+}
+
+.left h3, .right h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.left p, .right p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.review-details {
+    width: calc(100% - 150px); /* Adjust width of review details */
+    float: left; /* Float left to keep it aligned */
+}
+.review-content {
+    width: 130px; /* Adjust width of review content */
+    float: right; /* Float right to keep it aligned */
+}
+
+      .icon-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .icon-number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        background-color: red; 
+        padding: 5px 16px;
+        border-radius: 50%;
+      }
+
+      .badge-icon-number {
+        position: absolute;
+        top: 66%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        background-color: rgba(255, 0, 0, 0.7); /* Red background color with 50% transparency */
+        padding: 8px 16px; /* Adjust padding for horizontal length */
+        border-radius: 12px; /* Adjust border-radius to half of the padding */
+        border: 2px solid white; /* Add a 2px solid white border */
+      }
+
+      .content strong {
+          font-weight: bold;
+      }
+
+      .badge-image-container {
+    display: inline-block; /* Ensure images and icons are displayed inline */
+    position: relative; /* Position the badge image container */
+    margin-bottom: 10px;
+}
+
+.badge-image {
+    vertical-align: middle; /* Align the image vertically with the text */
+}
+
+.view-all-badges {
+    display: inline-flex; /* Ensure the link and arrow are displayed inline */
+    align-items: center; /* Align items vertically */
+    text-decoration: none;
+    color: #0056b3; /* Adjust the color as needed */
+}
+
+.center {
+    position: absolute; /* Position the link absolutely */
+    bottom: -15px; /* Adjust distance from the bottom */
+    align-content: center;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1>UWI</h1> <!-- Updated to have text inside -->
+    </div>
+    <div class="logo2"><h2>Student Conduct Tracker</h2></div>
+    <ul class="nav-bar">
+        <!-- Adjusted to only have the left side curved -->
+        <li><a href="/Student-Home">Home</a></li>
+        <li><a href="/leaderboard">LeaderBoard</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+  <!--  <div class="text">Student</div>
+  <div class="text3">Name</div>-->
+</header>
+ 
+
+<div class="student-info-card">
+
+    <nav class="student-info">
+      <div class="block text-gray-700 font-semibold">
+          <span class="font-bold">Student Name: {{ student.fullname }}</span>
+      </div>
+      <div class="block text-gray-700 font-semibold">
+          <span class="font-bold">Student ID: {{ student.UniId }}</span>
+      </div>
+    <div class="block text-gray-700 font-semibold">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/GPA.png?raw=true" alt="GPA Icon" class="mini-icon"> GPA: {{ student.gpa }}
+    </div>
+      <div class="block text-gray-700 font-semibold">
+          <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/email.png?raw=true" alt="Email Icon" class="mini-icon"> Email: {{ student.email }}
+      </div>
+      <div class="block text-gray-700 font-semibold">
+          <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/degreeprogram.png?raw=true" alt="Programme Icon" class="mini-icon"> Degree: {{ student.degree }}
+      </div>
+    <div class="block text-gray-700 font-semibold">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Leaderboard.png?raw=true" alt="Leaderboard Icon" class="mini-icon"> Leaderboard Rank: {{ karma.rank}}
+    </div>
+    
+      <!--
+      <div class="block text-gray-700 font-semibold">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Points.png?raw=true" alt="Points Icon" class="mini-icon"> Academic Points:  {{ karma.academicPoints}} 
+      </div>
+      <div class="block text-gray-700 font-semibold">
+      <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Points.png?raw=true" alt="Points Icon" class="mini-icon"> Review Points: {{ karma.reviewsPoints}} 
+      </div>
+      <div class="block text-gray-700 font-semibold">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Points.png?raw=true" alt="Points Icon" class="mini-icon"> Achievement Points: {{ karma.accomplishmentPoints}}
+      </div>
+    -->
+
+      <div class="block text-gray-700 font-semibold">
+        <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/Points.png?raw=true" alt="Points Icon" class="mini-icon"> Karma Points: {{ karma.points}}
+      </div>
+<div><br><br><br></div>
+
+      <!-- <div class="block text-gray-700 font-semibold">
+          <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/admittedterm.png?raw=true" alt="Admitted Term Icons" class="mini-icon"> <a>Admitted Term: {{ student.admittedTerm }}</a>
+      </div> -->
+</nav>
+
+<div class="badges-container">
+  <div class="icon-container">
+    <span class="icon-number">{{ notification_values[4]  }}</span>
+  </div>
+  <div class="badges-card">
+    <div class="badgestitle">Badges</div>
+    <div class="badge-section">
+      {% for badge in student.badges[-4:] %}
+        <div class="badge-image-container">
+          <img src={{badge.imageLink}} alt="Badge placeholder" class="badge-image">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="center">
+        <a href="/view-all-badges" class="view-all-badges">
+            <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/down.png?raw=true" alt="Down Arrow" class="arrow-icon">
+            <p class="content"><strong>View All Badges</strong></p>
+        </a>
+    </div>
+</div>
+
+</div>
+
+<div class="request-container">
+    <div class="request-card">
+        <a href="/upload-transcript">
+        </a>
+        <a href="/request-recommendation-form">
+        <div class="badge-section3">
+            <div class="reco-section2">
+            <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/recco.png?raw=true" alt="Image 2" class="request-image">
+            <p>Request Recommendation</p>
+            </div>
+            </div>
+        </a>
+    
+</div>
+</div>
+  
+
+  <div class="rcontainer">
+
+<div class="reviews-container2">
+
+  <div class="icon-container">
+    <span class="icon-number">{{ notification_values[1]  }}</span>
+  </div>
+    <div class="reviews-card">
+    <h1>Achievements</h1>
+      <a href="/view-all-achievements" class="view-all-reviews">
+          <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/down.png?raw=true" alt="Down Arrow" class="arrow-icon">
+          <p class="content"><strong>View All Achievements</strong></p>
+      </a>
+    </div>
+</div>
+
+    <div class="reviews-container">
+
+      <div class="icon-container">
+        <span class="icon-number">{{ notification_values[2]  }}</span>
+      </div>
+
+        <div class="reviews-card">
+        <h1>Reviews</h1>
+          <a href="/view-all-reviews" class="view-all-reviews">
+              <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/down.png?raw=true" alt="Down Arrow" class="arrow-icon">
+            <p class="content"><strong>View All Reviews</strong></p>
+          </a>
+        </div>
+    </div>
+
+<div class="reviews-container3">
+  <div class="icon-container">
+    <span class="icon-number">{{ notification_values[0]  }}</span>
+  </div>
+
+    <div class="reviews-card">
+
+    <h1>Incidents</h1>
+      <a href="/view-all-incidents" class="view-all-reviews">
+          <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/down.png?raw=true" alt="Down Arrow" class="arrow-icon">
+          <p class="content"><strong>View All Incidents</strong></p>
+      </a>
+    </div>
+</div>
+
+    <div class="reviews-container4">
+      <div class="icon-container">
+        <span class="icon-number">{{notification_values[3] }}</span>
+      </div>
+
+        <div class="reviews-card">
+
+        <h1>Recommendation Request</h1>
+          <a href="/viewRR" class="view-all-reviews">
+              <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/down.png?raw=true" alt="Down Arrow" class="arrow-icon">
+              <p class="content"><strong>View Recommendation Request</strong></p>
+          </a>
+        </div>
+    </div>
+  </div>
+<!-- Rest of your content -->
+<script>
+  const studentAvatar = document.getElementById('studentAvatar');
+  const editButton = document.getElementById('editButton');
+
+  editButton.addEventListener('click', () => {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+
+      fileInput.addEventListener('change', (event) => {
+          const file = event.target.files[0];
+          const reader = new FileReader();
+
+          reader.onload = () => {
+              studentAvatar.src = reader.result;
+          };
+
+          reader.readAsDataURL(file);
+      });
+
+      fileInput.click();
+  });
+</script>
+</body>
+  
+</html>
