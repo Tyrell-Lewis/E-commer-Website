@@ -4,6 +4,21 @@
 
 {% block style %}
 
+<style>
+    .carousel {
+    display: flex;
+    flex-direction: row; /* important! */
+    /* overflow-x: auto; */
+    /* scroll-snap-type: x mandatory; */
+    }
+
+    .carousel-item {
+    /* flex: 0 0 auto; */
+    width: 5%; /* or whatever you prefer */
+    height: 5%;
+    /* scroll-snap-align: center; */
+    }
+</style>
 {%endblock%}
 
 
@@ -17,8 +32,24 @@
 <p>Landing page content goes here</p>
 
 
+    <div class="carousel" style="width: 100%;">
+        <a class="carousel-item" href="#one!" ><img src="images/landingPageImages/asus.jpg"></a>
+        <a class="carousel-item" href="#two!" ><img src=""></a>
+    </div>
+
+
+
+
+
 {%endblock%}
 
 {% block script %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, {});
+    });
+</script>
 
 {% endblock %}
