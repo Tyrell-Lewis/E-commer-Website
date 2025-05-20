@@ -11,3 +11,4 @@ from .staffcsv import *
 from .comment import *
 from .reply import *
 
+from .customer import *

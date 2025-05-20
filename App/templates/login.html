@@ -1,6 +1,6 @@
 {% extends "LoginLayout.html" %}
 {% block title %}Login Page{% endblock %}
-{% block page %}Student Conduct Tracker{% endblock %}
+{% block page %}Blank name{% endblock %}
 
 {{ super() }}
 
@@ -172,56 +172,49 @@
 
     /* Add styles for the message box */
     .message {
-        color: white;
-         background-color: #ff4d4d; /* Red background for error */
-         border: 2px solid #ff0000;
+    color: red;
+        border: 2px solid #051d3c;
         padding: 10px;
         border-radius: 8px;
         text-align: center;
-        font-weight: bold;
-         top: 10%;
     }
 }
 </style>
 
-
-<!-- <header>
-    <div class="logo">
-        <h1>UWI</h1> 
-    </div>
-    <div class="logo2"><h2>Student Conduct Tracker</h2></div>
-</header> -->
 <div class="loginpage">
-<img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/LoginPage.png?raw=true" alt="Description" class="loginpage-img">
-<img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/LoginPage.png?raw=true" alt="Description" class="loginpage-img2">
-<!-- Rest of your content -->
-<!-- Login card -->
-<div class="login-card">
-    <!-- Image and text header -->
-    <div class="login-header">
-        <!-- <img src="https://github.com/RichardR963/Info3604_Project/blob/main/images/AV2.png?raw=true"" alt="Student Conduct Tracker"> -->
-        <h2>Student Conduct Tracker</h2>
-    </div>
-    <!-- Login form -->
-  <form class="login-form" action="/login" href="/login" method="POST">
-      <p>Username</p>
-      <input name="username" id="username" type="text" placeholder="Username">
-      <p> Password</p>
-      <input name="password" id="password" type="password" placeholder="Password">
-      <input type="submit" class="btn" style="background-color: #3E92CC;text-align: center;padding:0;" value="Login">
-      
-    {% if message %}
-    <div class="message-container">
-        <div class="message">
-            <p>{{ message }}</p>
+
+    
+
+    <div class="login-card">
+        <div class="login-header">
+            <h2>Log In</h2>
+        </div>
+        <!-- Login form -->
+        <!-- <form class="login-form" action="/login" href="/login" method="POST">
+            <p>Username</p>
+            <input name="username" id="username" type="text" placeholder="Username">
+            <p> Password</p>
+            <input name="password" id="password" type="password" placeholder="Password">
+            <input type="submit" class="btn" style="background-color: #3E92CC;text-align: center;padding:0;" value="Login">
+            
+        </form> -->
+
+
+        <form method="POST" action="/login" class="login-form">
+            {{ form.hidden_tag() }}
+            <p>Username</p>
+            {{ form.username(size=32, placeholder="Username") }}
+            
+            <p>Password</p>
+            {{ form.password(size=32, placeholder="Password") }}
+            
+            {{ form.submit(class="btn", style="background-color: #3E92CC; text-align: center;padding:0;") }}
+        </form>
+
+        <div style="color: black; margin: 25px; text-align: center;" class="signup_link" >
+            Not a user? <a style="color: black; text-decoration: underline;" href="/signup" class="signup-link">Sign Up</a>
         </div>
     </div>
-    {% endif %}
-  </form>
-  <div style="color: black; margin: 25px; text-align: center;" class="signup_link" >
-    Not a user? <a style="color: black; text-decoration: underline;" href="/signup" class="signup-link">Sign Up</a>
-  </div>
-</div>
 </div>
 
 

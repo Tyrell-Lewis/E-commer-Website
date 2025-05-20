@@ -4,8 +4,9 @@ from .index import index_views
 from .auth import auth_views
 from .student import student_views
 from .staff import staff_views
+from .customer import customer_views
 
 
-views = [index_views, auth_views, student_views, staff_views]
+views = [index_views, auth_views, student_views, staff_views, customer_views]
 
 # blueprints must be added to this list

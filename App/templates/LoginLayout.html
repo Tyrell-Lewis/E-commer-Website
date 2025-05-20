@@ -27,13 +27,39 @@
             </ul>
         </div> -->
       </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
     </nav>
+
 
     <div class="login-container">
       {% block content %}{% endblock %}
     </div>
+
+
+    
+    {%block script%} {%endblock%}
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='main.js') }}"></script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let flashMessages = document.querySelectorAll(".flash-message");
+            flashMessages.forEach(function (msg) {
+            msg.style.opacity = "0";
+            setTimeout(() => (msg.style.display = "none"), 500);
+            });
+        }, 3000);
+        });
+    </script>
   </body>
 </html>

@@ -68,7 +68,7 @@ body {
     color: #2E5266;
     text-decoration: underline;
 }
-.message-container {
+/* .message-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +80,7 @@ body {
     padding: 10px;
     border-radius: 8px;
     text-align: center;
-}
+} */
 /* General Styling */
 body {
     font-family: 'Roboto', sans-serif;

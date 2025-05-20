@@ -6,3 +6,5 @@ from .review import *
 from .karma import *
 from .reply import *
 from .comment import *
+
+from .customer import *

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, flash, send_from_directory, redirect, url_for
 from App.models import db, Student
 # from App.controllers import (
 #     create_student,
@@ -16,7 +16,8 @@ index_views = Blueprint('index_views',
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-  return render_template('login.html')
+  flash(f"Message pop up works!")
+  return render_template('landingPage.html')
 
 @index_views.route('/init', methods=['GET'])
 def init():
