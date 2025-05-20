@@ -1,4 +1,4 @@
-from App.models import User, Student
+from App.models import User
 from App.database import db
 
 def create_user(username, firstname, lastname, password, email):

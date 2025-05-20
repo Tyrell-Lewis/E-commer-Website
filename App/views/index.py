@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, flash, send_from_directory, redirect, url_for
-from App.models import db, Student
+from App.models import db
 # from App.controllers import (
 #     create_student,
 #     create_staff,

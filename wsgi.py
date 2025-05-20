@@ -7,7 +7,7 @@ import subprocess
 
 from App.database import db, get_migrate
 from App.main import create_app
-from App.models import Customer, Student, Karma, Comment
+from App.models import Customer
 from App.models import User
 
 from App.controllers import(
