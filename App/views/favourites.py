@@ -13,20 +13,15 @@ from App.models import Customer, User #,  Staff, Review
 #     like, dislike, update_staff_profile, get_all_students_json, get_staff_by_username, login_user)            #added get_reviews
 
 
-customer_views = Blueprint('customer_views',
+favourite_views = Blueprint('favourite_views',
                         __name__,
                         template_folder='../templates')
 '''
 Page/Action Routes
 '''
 
-@customer_views.route("/Home", methods=["GET"])
-def index_page():
+@favourite_views.route("/favourites", methods=["GET"])
+def favourites_page():
     
-    return render_template("landingPage.html")
+    return render_template("favouritesPage.html")
 
-
-@customer_views.route("/profile", methods=["GET"])
-def profile_page():
-    
-    return render_template("profilePage.html")
