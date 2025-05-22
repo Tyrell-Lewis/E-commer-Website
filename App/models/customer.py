@@ -1,10 +1,16 @@
 from App.database import db
 from .user import User
+from .cart import Cart
 
 class Customer(User):
     __tablename__ = 'customer'
     ID = db.Column(db.Integer, db.ForeignKey('user.ID', name='fk_customer_user'), primary_key=True)
-    # orders = db.relationship('Order', backref='regularDrils', lazy='joined')
+    
+    customerCart = db.relationship('Cart', backref='customer', uselist=False,  # This enforces one-to-one 
+        cascade="all, delete-orphan", passive_deletes=True, lazy='joined')
+    
+
+    
     # favouriteDrills = db.relationship('Drill', secondary=favourite_drills, backref='favourited_by',lazy='joined')
 
     # regular.favouriteDrills: list of drills the regular favourited

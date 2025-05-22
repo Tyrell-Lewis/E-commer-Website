@@ -11,9 +11,9 @@ index_views = Blueprint('index_views',
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-  flash(f"Message pop up works!")
-  items = get_all_items()
-  return render_template('landingPage.html', items=items)
+  
+  
+  return redirect("/Home")
 
 @index_views.route('/init', methods=['GET'])
 def init():

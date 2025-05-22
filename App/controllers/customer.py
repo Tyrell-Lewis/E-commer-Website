@@ -23,6 +23,40 @@ def create_customer(username, firstname, lastname, email, password):
         db.session.rollback()
         return False
 
+
+def get_customer_cart_id(customer_id):
+    try:
+        customer = get_customer_by_id(customer_id)
+
+        if customer:
+            if customer.customerCart:
+
+                print("should return the id properly")
+                return customer.customerCart.ID
+            else:
+                print("No customer cart!")
+                return None
+        else:
+            print("Not a customer!")
+            return None
+    except SQLAlchemyError as e:
+        print("[customer.get_customer_cart_id] Error occurred while creating new customer: ", str(e))
+        return None
+
+def get_customer_cart(customer_id):
+    try:
+        customer = get_customer_by_id(customer_id)
+
+        if customer:
+            print("should return the id properly")
+            return customer.customerCart
+        else:
+            print("Not a customer!")
+            return None
+    except SQLAlchemyError as e:
+        print("[customer.get_customer_cart_id] Error occurred while creating new customer: ", str(e))
+        return None
+
 def get_customer_by_id(id):
     try:
         customer = Customer.query.filter_by(ID=id).first()

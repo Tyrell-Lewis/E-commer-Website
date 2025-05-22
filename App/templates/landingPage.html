@@ -72,7 +72,8 @@
     <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
     {%if items%}
         {%for item in items%}
-            <button><a href="reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
+            <button><a href="/reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
+            <button><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
             <P>Item name: {{item.name}} </P>
             <P>Item brand: {{item.brand}} </P>
             <P>Item description: {{item.description}} </P>
