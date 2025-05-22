@@ -3,15 +3,9 @@ from flask_login import login_required, current_user
 import textwrap
 
 from App.models import Customer, User #,  Staff, Review
-
-# from App.controllers import (
-#     get_student_by_UniId, get_student_by_id,
-#     get_staff_by_id, get_staff_by_id, create_review, get_karma,
-#     calculate_ranks, get_reviews, get_review, edit_review_work, delete_review_work,
-#     create_comment, get_comment, get_comment_staff,
-#     get_reply, create_reply, get_all_reviews, create_staff, get_student_review_index, get_karma_history,
-#     like, dislike, update_staff_profile, get_all_students_json, get_staff_by_username, login_user)            #added get_reviews
-
+from App.controllers import (
+  get_all_items
+)
 
 customer_views = Blueprint('customer_views',
                         __name__,
@@ -22,8 +16,10 @@ Page/Action Routes
 
 @customer_views.route("/Home", methods=["GET"])
 def index_page():
-    
-    return render_template("landingPage.html")
+    flash(f"Message pop up works!")
+
+    items = get_all_items()
+    return render_template("landingPage.html", items=items)
 
 
 @customer_views.route("/profile", methods=["GET"])

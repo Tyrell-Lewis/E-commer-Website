@@ -13,6 +13,8 @@ class Item(db.Model):
     availability = db.Column(db.Boolean, default=False)
     stock = db.Column(db.Integer, nullable=True)
     picture = db.Column(db.Text, nullable=True)
+    cartID = db.Column(db.Integer, db.ForeignKey('cart.ID', ondelete='CASCADE', name='fk_item_cart'), nullable = True)
+    cart_quantity = db.Column(db.Integer)
 
     def __init__(self, name, brand, description, colour, size, clothing_type, price, stock):
         self.name = name

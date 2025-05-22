@@ -22,5 +22,5 @@ def cart_page():
 
 @item_views.route("/reduce_stock/<int:item_id>", methods=["GET"])
 def reduce_stock_action(item_id):
-    sell_item(item_id, 2)
+    sell_item(item_id, 2) #Replace 2 with the a varibale for quantity, which we get from some form or number picker.
     return redirect(request.referrer)

@@ -4,7 +4,7 @@
 
 {% block style %}
 <style>
-    
+
 
 
 </style>
@@ -22,6 +22,21 @@
  
 <p>cart page goes here</p>
 
+<div>
+    {%if cart%}
+        <p>Cart id: {{cart.ID}} </p>
+        {%for item in cart.items%}
+            <p>Item name: {{item.name}} </p>
+            <p>Item quantity: {{item.cart_quantity}} </p>
+            <p>Item description: {{item.description}} </p>
+
+        {%endfor%}
+    {%else%}
+        <P>There are no carts</P>
+    {%endif%}
+
+
+</div>
 
 {%endblock%}
 

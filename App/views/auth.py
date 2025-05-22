@@ -7,7 +7,8 @@ from .index import index_views
 from App.models import User
 from App.controllers import (
   create_user, jwt_authenticate, login,
-  get_customer_by_username, create_customer
+  get_customer_by_username, create_customer,
+  create_cart
 
 )
 
@@ -99,6 +100,7 @@ def signup():
 
     customer = get_customer_by_username(form.username.data)
     login_user(customer)
+    create_cart(current_user.get_id())
 
     return redirect("/Home")
 
@@ -141,7 +143,7 @@ def signup():
 @auth_views.route('/whoami')
 def whoami():
     if current_user.is_authenticated:
-        return f"Logged in as {current_user.username}"
+        return f"Logged in as {current_user.username} with the id of: {current_user.ID}"
     else:
         return "Not logged in"
 
