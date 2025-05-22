@@ -11,6 +11,7 @@ from App.models import Customer
 from App.models import User
 
 from App.controllers import(
+    initialize,
     create_customer
 )
 # from App.controllers import (
@@ -40,11 +41,14 @@ migrate = get_migrate(app)
 
 # This command creates and initializes the database
 @app.cli.command("init", help="Creates and initializes the database")
-def initialize():
-  db.drop_all()
-  db.create_all()
+def init():
 
-  create_customer(username="bob", firstname="Bob", lastname="Johnson", email="bob@mail.com", password="bobpass")
+    initialize()
+    print ("Database initialized!")
+#   db.drop_all()
+#   db.create_all()
+
+#   create_customer(username="bob", firstname="Bob", lastname="Johnson", email="bob@mail.com", password="bobpass")
 
 #   create_student(username="billy",
 #                  firstname="Billy",

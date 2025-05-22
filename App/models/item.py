@@ -1,9 +1,8 @@
 from App.database import db
-from .user import Customer
 
 class Item(db.Model):
     __tablename__ = 'item'
-    ID = db.Column(db.Integer, db.ForeignKey('customer.ID', name='fk_customer_user'), primary_key=True)
+    ID = db.Column(db.Integer, primary_key=True)
     brand = db.Column(db.String(120), nullable=False)
     name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(300), nullable=False)
@@ -13,19 +12,19 @@ class Item(db.Model):
     price = db.Column(db.Float, nullable=False)
     availability = db.Column(db.Boolean, default=False)
     stock = db.Column(db.Integer, nullable=True)
-    clothing_pic = db.Column(db.Text, nullable=True)
+    picture = db.Column(db.Text, nullable=True)
 
     def __init__(self, name, brand, description, colour, size, clothing_type, price, stock):
         self.name = name
         self.brand = brand
-        self.descriModelption = description
+        self.description = description
         self.colour = colour
         self.size = size
         self.clothing_type = clothing_type
         self.price = price
         self.stock = stock
         
-        self.clothing_pic = "https://raw.githubusercontent.com/Tyrell-Lewis/E-commer-Website/refs/heads/main/images/landingPageImages/asus.jpg"
+        self.picture = "https://raw.githubusercontent.com/Tyrell-Lewis/E-commer-Website/refs/heads/main/images/landingPageImages/asus.jpg"
         # self.stats_Affected = stats_Affected
 
     def get_id(self):
@@ -33,12 +32,15 @@ class Item(db.Model):
 
     def get_json(self):
         return{
-            'drill_id': self.id,
+            'item_id': self.id,
             'name': self.name,
-            "createdByRegularID": self.createdByRegularID,
-            'category': self.category,
-            'difficulty': self.difficulty,
-            'details': self.details,
-            "dateCreated": self.dateCreated.strftime("%d-%m-%Y %H:%M"),  # Format the date/time
-            'stats_Affected': self.stats_Affected,
+            "brand": self.brand,
+            'description': self.description,
+            'colour': self.colour,
+            'size': self.size,
+            "clothing_type": self.clothing_type,  # Format the date/time
+            'price': self.price,
+            'stock': self.stock,
+            'availability': self.availability
+
         }
