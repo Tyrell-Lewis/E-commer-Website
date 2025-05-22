@@ -66,8 +66,31 @@
 {{ super() }}
 
 {%block content%}
-<p>Landing page content goes here</p>
 
+
+<div>
+    <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
+    {%if items%}
+        {%for item in items%}
+            <button><a href="reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
+            <P>Item name: {{item.name}} </P>
+            <P>Item brand: {{item.brand}} </P>
+            <P>Item description: {{item.description}} </P>
+            <P>Item price: ${{item.price}} </P>
+            <P>Item stock: {{item.stock}} </P>
+            <P>Item colour: {{item.colour}} </P>
+            <P>Item clothing_type: {{item.clothing_type}} </P>
+            <P>Item size: {{item.size}} </P>
+            <p>Item availability: {{item.availability}} </p>
+            <p>Item picture:</p>
+            <img src="{{item.picture}}" style="width: 20%;">
+        {%endfor%}
+    {%else%}
+        <P>There are no items</P>
+    {%endif%}
+
+
+</div>
 
 
 <div class="carousel" style="width: 100%;">
@@ -88,7 +111,6 @@
         var instances = M.Carousel.init(elems, {
         });
 
-        // Optional: auto slide every 4 seconds
         setInterval(function () {
         instances.forEach(instance => instance.next());
         }, 10000);

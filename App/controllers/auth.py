@@ -4,6 +4,10 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from App.models import User
 
+def initialize():
+    db.drop_all()
+    db.create_all()
+
 def jwt_authenticate(username, password):
     try:
         user = User.query.filter_by(username=username).first()
