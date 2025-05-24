@@ -7,7 +7,7 @@ class Cart(db.Model):
     #
     customerID = db.Column(db.Integer, db.ForeignKey('customer.ID', name='fk_cart_customer',
                                                      ondelete='CASCADE'), unique=True, nullable=False)
-    items = db.relationship('Item', backref='in_cart', cascade="all, delete-orphan", passive_deletes=True)
+    items = db.relationship('CartItem', backref='in_cart', cascade="all, delete-orphan", passive_deletes=True)
     cartPrice = db.Column(db.Float, nullable=False, default=0.0)
 
 
@@ -24,7 +24,7 @@ class Cart(db.Model):
     def get_json(self):
         return{
             'cart_id': self.id,
-            'customerCartID': self.customerCartID,
+            'customerID': self.customerID,
             "cartPrice": self.cartPrice
 
         }

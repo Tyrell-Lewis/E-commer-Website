@@ -26,9 +26,9 @@
     {%if cart%}
         <p>Cart id: {{cart.ID}} </p>
         {%for item in cart.items%}
-            <p>Item name: {{item.name}} </p>
+            <p>Item name: {{item.product.name}} </p>
             <p>Item quantity: {{item.cart_quantity}} </p>
-            <p>Item description: {{item.description}} </p>
+            <p>Item description: {{item.product.description}} </p>
 
         {%endfor%}
     {%else%}
