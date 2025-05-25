@@ -26,9 +26,14 @@
     {%if cart%}
         <p>Cart id: {{cart.ID}} </p>
         {%for item in cart.items%}
-            <p>Item name: {{item.name}} </p>
+            <button><a href="/removeFromCart/{{item.productID}}">Remove from cart here</a></button> <!-- Used the productID not ID, since the controller checks that, can change if you want. -->
+            <button><a href="/updateInCart/{{item.productID}}">update price cart here</a></button>
+            <p>Item name: {{item.product.name}} </p>
             <p>Item quantity: {{item.cart_quantity}} </p>
-            <p>Item description: {{item.description}} </p>
+            <p>Item description: {{item.product.description}} </p>
+            <P>The cart item id is: {{item.ID}} </P>
+            <p>The product id is: {{item.productID}} </p>
+            <P>The cart id is : {{item.cartID}} </P>
 
         {%endfor%}
     {%else%}

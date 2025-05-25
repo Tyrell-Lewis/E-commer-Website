@@ -4,7 +4,8 @@ import textwrap
 
 from App.models import Customer, User #,  Staff, Review
 from App.controllers import(
-    add_item_to_cart, get_customer_cart, get_customer_cart_id, get_cart_by_id, 
+    add_item_to_cart, remove_item_from_cart, update_item_in_cart,
+    get_customer_cart, get_customer_cart_id, get_cart_by_id, 
     get_customer_by_id
 )
 
@@ -33,6 +34,33 @@ def add_to_cart_action(item_id):
 
 
     add_item_to_cart(item_id=item_id, cart_id=cart_id, customer_id=current_user.get_id(), quantity=3)
+    
+    return redirect(request.referrer)
+
+
+@cart_views.route("/removeFromCart/<int:item_id>", methods=["GET"])
+def remove_from_cart_action(item_id):
+    # customer = current_user.get_id()
+    cart_id = get_customer_cart_id(current_user.get_id())
+
+    #cart = get_customer_cart(current_user.get_id())
+
+    print(f'Removing cart_item: {item_id} from the cart: {cart_id}')
+
+    remove_item_from_cart(item_id=item_id, cart_id=cart_id, customer_id=current_user.get_id())
+    
+    return redirect(request.referrer)
+
+
+@cart_views.route("/updateInCart/<int:item_id>", methods=["GET"])
+def update_item_cart_action(item_id):
+    # customer = current_user.get_id()
+    cart_id = get_customer_cart_id(current_user.get_id())
+
+    #cart = get_customer_cart(current_user.get_id())
+    print(f'Updating cart_item: {item_id} from the cart: {cart_id}')
+
+    update_item_in_cart(item_id=item_id, cart_id=cart_id, customer_id=current_user.get_id(), quantity=7)
     
     return redirect(request.referrer)
 

@@ -14,5 +14,9 @@ def initialize():
     create_customer(username="bob", firstname="Bob", lastname="Johnson", email="bob@mail.com", password="bobpass")
     create_cart(1)
     create_item(name="Blue dragon t-shirt", brand="brand name", description="Description for blue dragon t-shirt",
-                 colour="blue", size="medium", clothing_type="t-shirt", price=29.99, stock=50)
-    # create_cart(1)
+                 colour="blue", size="medium", clothing_type="t-shirt", price=29.99, stock=10)
+    create_item(name="Red lion pants", brand="brand name", description="Description for Red lion pants",
+                 colour="red", size="medium", clothing_type="pants", price=29.99, stock=10)
+    create_item(name="green dragon t-shirt", brand="brand name", description="Description for green dragon t-shirt",
+                 colour="green", size="medium", clothing_type="t-shirt", price=29.99, stock=10)
+
