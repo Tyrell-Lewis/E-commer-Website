@@ -31,7 +31,7 @@ def get_customer_cart_id(customer_id):
         if customer:
             if customer.customerCart:
 
-                print("should return the id properly")
+                # print("should return the id properly")
                 return customer.customerCart.ID
             else:
                 print("No customer cart!")
@@ -48,7 +48,7 @@ def get_customer_cart(customer_id):
         customer = get_customer_by_id(customer_id)
 
         if customer:
-            print("should return the id properly")
+            # print("should return the id properly")
             return customer.customerCart
         else:
             print("Not a customer!")
