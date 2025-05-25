@@ -6,13 +6,14 @@
         <title>{% block title%}{%endblock%}</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 
         <style>
             body {
                 font-family: "Roboto", sans-serif;
                 margin: 0;
-                padding: 5;
+                padding: 5px;
                 background-color: #7c90a0;
                 transition: margin-left 0.5s;
             }
@@ -513,6 +514,9 @@
                 </div>
             </div>
 
+            <!-- <div class="test">
+                <p>just a test</p>
+            </div> -->
         </nav>
 
 
@@ -527,13 +531,39 @@
               <div class="flash-message {{ category }}">{{ message }}</div>
               {% endfor %}
             </div>
-        {% endif %} {% endwith %}
+            {% endif %} {% endwith %}
 
         
         {%block script%} {%endblock%}
 
-        
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
         <script>
+        AOS.init();
+        </script>
+        <script>
+            const steps = document.querySelectorAll('.step');
+            let currentStep = 0;
+            const delayBetweenSteps = 1000; // 1s between reveals
+        
+            function revealNextStep() {
+              if (currentStep < steps.length) {
+                steps[currentStep].classList.add('visible');
+                currentStep++;
+                setTimeout(revealNextStep, delayBetweenSteps);
+              } else {
+                // Unlock scroll
+                document.body.style.overflow = 'auto';
+              }
+            }
+        
+            // Start the reveal animation after DOM loads
+            window.addEventListener('DOMContentLoaded', () => {
+              revealNextStep();
+            });
+          </script>
+
+        <script>
+            
             document.addEventListener("DOMContentLoaded", function () {
                 var el = document.querySelector(".more");
                 var btn = el.querySelector(".more-btn");

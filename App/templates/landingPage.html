@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}       {% endblock %}
 {% block page %}        {% endblock %}
-
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 {% block style %}
 <style>
     /* .carousel {
@@ -55,6 +55,24 @@
             width: 60% !important;
         }
     }
+
+    /* animations */
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .section1 { background-color: #d7e9f7; }
+    .section2 { background-color: #f7d7d7; }
+    .section3 { background-color: #d7f7dd; }
+
+    h1, p {
+      margin: 0;
+    }
 </style>
 {%endblock%}
 
@@ -66,41 +84,38 @@
 {{ super() }}
 
 {%block content%}
+<p>Landing page content goes here</p>
 
 
-<div>
-    <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
-    {%if items%}
-        {%for item in items%}
-            <button><a href="/reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
-            <button><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
-            <P>Item name: {{item.name}} </P>
-            <P>Item brand: {{item.brand}} </P>
-            <P>Item description: {{item.description}} </P>
-            <P>Item price: ${{item.price}} </P>
-            <P>Item stock: {{item.stock}} </P>
-            <P>Item colour: {{item.colour}} </P>
-            <P>Item clothing_type: {{item.clothing_type}} </P>
-            <P>Item size: {{item.size}} </P>
-            <p>Item availability: {{item.availability}} </p>
-            <p>Item picture:</p>
-            <img src="{{item.picture}}" style="width: 20%;">
-        {%endfor%}
-    {%else%}
-        <P>There are no items</P>
-    {%endif%}
 
+  <section>
+    <div class="carousel" style="width: 100%;">
+        <a class="carousel-item" href="#one!"><img src="https://images.unsplash.com/photo-1544033527-b192daee1f5b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
+        <a class="carousel-item" href="#two!" ><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
+        <a class="carousel-item" href="#three!" ><img src="https://images.unsplash.com/photo-1597076545399-91a3ff0e71b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
+        <a class="carousel-item" href="#four!" ><img src="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGd5bSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D"></a>
+        <a class="carousel-item" href="#five!" ><img src="https://images.unsplash.com/photo-1620188526357-ff08e03da266?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGd5bSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D"></a>
+    </div>
+  </section>
 
-</div>
+  <section class="section2" data-aos="zoom-in" data-aos-delay="200">
+    <h1><div class="step-container">
+        <div class="sticky">
+          <div class="step" id="step1">Step 1: Welcome</div>
+          <div class="step" id="step2">Step 2: Features</div>
+          <div class="step" id="step3">Step 3: Experience</div>
+          <div class="step" id="step4">Step 4: Continue</div>
+        </div>
+      </div></h1>
+  </section>
 
+  <section class="section3" data-aos="flip-left" data-aos-duration="1000">
+    <h1>Flip Left with Custom Duration</h1>
+  </section>
 
-<div class="carousel" style="width: 100%;">
-    <a class="carousel-item" href="#one!"><img src="https://images.unsplash.com/photo-1544033527-b192daee1f5b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
-    <a class="carousel-item" href="#two!" ><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
-    <a class="carousel-item" href="#three!" ><img src="https://images.unsplash.com/photo-1597076545399-91a3ff0e71b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a>
-    <a class="carousel-item" href="#four!" ><img src="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGd5bSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D"></a>
-    <a class="carousel-item" href="#five!" ><img src="https://images.unsplash.com/photo-1620188526357-ff08e03da266?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGd5bSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D"></a>
-</div>
+  <section class="section1" data-aos="fade-up">
+    <h1>Fade Up on Scroll</h1>
+  </section>
 
 {%endblock%}
 
@@ -112,6 +127,7 @@
         var instances = M.Carousel.init(elems, {
         });
 
+        // Optional: auto slide every 4 seconds
         setInterval(function () {
         instances.forEach(instance => instance.next());
         }, 10000);
