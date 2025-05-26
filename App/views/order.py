@@ -52,7 +52,6 @@ def create_checkout_session():
         }]
     total_amount = 29.99
 
-
     # Create Stripe checkout session, just follow the stripe docs to make this and append to it in future.
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -91,10 +90,5 @@ def stripe_webhook():
         checkout_session_id = checkout_session.get('id')
 
         update_order(customer_id = current_user.get_id(), stripe_session_id=checkout_session_id)
-
-        # order = Order.query.filter_by(stripe_session_id=checkout_session_id).first()
-        # if order:
-        #     order.status = 'paid'
-        #     db.session.commit()
 
     return jsonify({'status': 'success'})

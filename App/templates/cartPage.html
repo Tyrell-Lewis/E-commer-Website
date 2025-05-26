@@ -24,14 +24,13 @@
 
 <div>
     {%if cart%}
-        <button><a href="/checkout" method="POST">Checkout</a></button>
 
         <form action="/checkout" method="POST">
             {% for item in cart.items %}
-              <input type="hidden" name="product_id" value="{{ item.id }}">
-              <input type="hidden" name="product_name" value="{{ item.name }}">
-              <input type="hidden" name="price" value="{{ item.price }}">
-              <input type="hidden" name="quantity" value="{{ item.quantity }}">
+              <input type="hidden" name="product_id" value="{{ item.productID }}">
+              <input type="hidden" name="product_name" value="{{ item.product.name }}">
+              <input type="hidden" name="price" value="{{ item.product.price }}">
+              <input type="hidden" name="quantity" value="{{ item.cart_quantity }}">
             {% endfor %}
             <button type="submit">Checkout Now</button>
           </form>
