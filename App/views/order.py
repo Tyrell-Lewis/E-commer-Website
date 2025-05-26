@@ -10,7 +10,7 @@ from App.controllers import(
     add_item_to_cart, remove_item_from_cart, update_item_in_cart,
     get_customer_cart, get_customer_cart_id, get_cart_by_id, 
     get_customer_by_id,
-    create_order, update_order
+    create_order, update_order, get_all_orders
 )
 
 order_views = Blueprint('order_views',
@@ -19,6 +19,12 @@ order_views = Blueprint('order_views',
 '''
 Page/Action Routes
 '''
+
+@order_views.route("/ordersPage", methods=["GET"])
+def orders_page():
+    orders = get_all_orders(current_user.get_id())
+    print(f'The orders are: {orders}')
+    return render_template("ordersPage.html", orders=orders)
 
 @order_views.route("/success", methods=["GET"])
 def checkout_success():
@@ -74,7 +80,7 @@ def create_checkout_session():
 def stripe_webhook():
     payload = request.data
     sig_header = request.headers.get('Stripe-Signature')
-    endpoint_secret = os.getenv("STRIPE_WEBHOOK_SECRET_TEST")
+    endpoint_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
 
     try:
         event = stripe.Webhook.construct_event(

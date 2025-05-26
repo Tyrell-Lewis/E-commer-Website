@@ -13,8 +13,8 @@ def load_config():
         from .default_config import JWT_ACCESS_TOKEN_EXPIRES, SQLALCHEMY_DATABASE_URI, SECRET_KEY
         config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
         config['SECRET_KEY'] = SECRET_KEY
-        config['STRIPE_SECRET_KEY'] = os.getenv("STRIPE_SECRET_KEY_TEST")
-        config['STRIPE_PUBLIC_KEY'] = os.getenv("STRIPE_PUBLIC_KEY_TEST")
+        config['STRIPE_SECRET_KEY'] = os.getenv("STRIPE_SECRET_KEY")
+        config['STRIPE_PUBLIC_KEY'] = os.getenv("STRIPE_PUBLIC_KEY")
         delta = JWT_ACCESS_TOKEN_EXPIRES
     else:
         config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')

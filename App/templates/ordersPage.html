@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}       {% endblock %}
+{% block page %}        {% endblock %}
+
+{% block style %}
+<style>
+    
+
+
+</style>
+{%endblock%}
+
+
+{%block navbar_tabs%}
+
+{%endblock%}
+
+
+{{ super() }}
+
+{%block content%}
+ 
+<p>Orders page goes here</p>
+
+<div>
+    {%if orders%}
+        <p>Orders are present</p>
+    {%else%}
+        <p>NO ORDERS YET.</p>
+    {%endif%}
+</div>
+
+{%endblock%}
+
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

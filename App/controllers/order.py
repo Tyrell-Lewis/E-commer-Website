@@ -6,6 +6,24 @@ from .customer import(
     get_customer_by_id
 )
 
+def get_all_orders(customer_id):
+    try:
+        existing_customer = get_customer_by_id(customer_id)
+
+        if not existing_customer:
+            return None
+
+        orders = Order.query.filter_by(customerID=existing_customer.ID).all()
+
+        if orders:
+            return orders
+        else:
+            return None
+    except SQLAlchemyError as e:
+        print(f'[DB_ERROR] create_order: {e}')
+        return None
+
+
 def get_order_by_id(order_id):
     try:
         order = Order.query.filter_by(ID=order_id).first()
