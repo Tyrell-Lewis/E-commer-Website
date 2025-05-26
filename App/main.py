@@ -1,4 +1,5 @@
 import os
+import stripe
 # from flask_mailman import Mail
 from flask import Flask
 from flask_login import LoginManager, current_user
@@ -201,6 +202,7 @@ def create_app(config_overrides={}):
   app.config['PREFERRED_URL_SCHEME'] = 'https'
   app.config['UPLOADED_PHOTOS_DEST'] = "App/uploads"
   app.config['UPLOAD_FOLDER'] = 'uploads'
+  stripe.api_key = app.config['STRIPE_SECRET_KEY']
   # app.config['MAIL_SERVER'] = "smtp.googlemail.com"
   # app.config['MAIL_PORT'] = 587
   # app.config['MAIL_USE_TLS'] = True
