@@ -1,6 +1,9 @@
 import os
 import importlib
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # must be updated to inlude addtional secrets/ api keys & use a gitignored custom-config file instad
 def load_config():
@@ -10,10 +13,14 @@ def load_config():
         from .default_config import JWT_ACCESS_TOKEN_EXPIRES, SQLALCHEMY_DATABASE_URI, SECRET_KEY
         config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
         config['SECRET_KEY'] = SECRET_KEY
+        config['STRIPE_SECRET_KEY'] = os.getenv("STRIPE_SECRET_KEY_TEST")
+        config['STRIPE_PUBLIC_KEY'] = os.getenv("STRIPE_PUBLIC_KEY_TEST")
         delta = JWT_ACCESS_TOKEN_EXPIRES
     else:
         config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
         config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+        config['STRIPE_SECRET_KEY'] = os.getenv("STRIPE_SECRET_KEY")
+        config['STRIPE_PUBLIC_KEY'] = os.getenv("STRIPE_PUBLIC_KEY")
         config['DEBUG'] = config['ENV'].upper() != 'PRODUCTION'
         delta = int(os.environ.get('JWT_ACCESS_TOKEN_EXPIRES', 7))
 
