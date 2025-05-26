@@ -26,3 +26,4 @@ poetry==1.7.1
 Flask-Session
 flask-wtf
 email_validator
+stripe
