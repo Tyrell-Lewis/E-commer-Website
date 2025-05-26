@@ -96,19 +96,22 @@
   <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
   {%if items%}
       {%for item in items%}
-          <button><a href="/reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
-          <button><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
-          <P>Item name: {{item.name}} </P>
-          <P>Item brand: {{item.brand}} </P>
-          <P>Item description: {{item.description}} </P>
-          <P>Item price: ${{item.price}} </P>
-          <P>Item stock: {{item.stock}} </P>
-          <P>Item colour: {{item.colour}} </P>
-          <P>Item clothing_type: {{item.clothing_type}} </P>
-          <P>Item size: {{item.size}} </P>
-          <p>Item availability: {{item.availability}} </p>
-          <p>Item picture:</p>
-          <img src="{{item.picture}}" style="width: 20%;">
+        <form action="/toggleFavourites/{{item.ID}}" method="POST" style="display:inline;">
+            <button type="submit">Toggle favourites</button>
+        </form>
+        <button><a href="/reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
+        <button><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
+        <P>Item name: {{item.name}} </P>
+        <P>Item brand: {{item.brand}} </P>
+        <P>Item description: {{item.description}} </P>
+        <P>Item price: ${{item.price}} </P>
+        <P>Item stock: {{item.stock}} </P>
+        <P>Item colour: {{item.colour}} </P>
+        <P>Item clothing_type: {{item.clothing_type}} </P>
+        <P>Item size: {{item.size}} </P>
+        <p>Item availability: {{item.availability}} </p>
+        <p>Item picture:</p>
+        <img src="{{item.picture}}" style="width: 20%;">
       {%endfor%}
   {%else%}
       <P>There are no items</P>

@@ -1,13 +1,12 @@
-from App.models import Customer#, Drill
+from App.models import Customer, FavouriteItem#, Drill
 from App.database import db 
 import os
 from werkzeug.utils import secure_filename
 from sqlalchemy.exc import SQLAlchemyError
 
 
-# from .drill import (
-#     create_drill,
-#     get_drill, get_drill_by_name
+# from .product import (
+#     get_item_by_id
 # )
 
 
@@ -134,36 +133,7 @@ def update_customer_profile(customer_id, firstname, lastname, email, profile_pic
 
 
 
-# def add_favourite_drill(customer_id, drill_id,):
-#     try:
 
-#         customer = get_customer_by_id(customer_id)
-#         drill = get_drill(drill_id)
-
-        
-
-#         if customer:
-#             if drill:
-#                 if drill in customer.favouriteDrills:
-#                     customer.favouriteDrills.remove(drill)
-#                     drill.favouriteStatus = False
-#                     db.session.commit()
-#                     return drill
-#                 else:
-#                     customer.favouriteDrills.append(drill)
-#                     drill.favouriteStatus = True
-#                     db.session.commit()
-#                     return drill
-#             else:
-#                 return None
-#         else:
-#             return None
-
-
-#     except SQLAlchemyError as e:
-#         print(f"[DB ERROR] add_favourite_drill: {e}")
-#         db.session.rollback()
-#         return None
 
 
 # def get_favourite_drills(customerID):

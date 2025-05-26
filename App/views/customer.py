@@ -4,7 +4,7 @@ import textwrap
 
 from App.models import Customer, User #,  Staff, Review
 from App.controllers import (
-  get_all_items
+  get_all_items,
 )
 
 customer_views = Blueprint('customer_views',

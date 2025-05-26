@@ -22,6 +22,17 @@
  
 <p>favourites page goes here</p>
 
+<div>
+    {%if favourites%}
+        {% for favourite in favourites%}
+        <p>Name: {{favourite.product.name}} </p>
+
+        {%endfor%}
+    {%else%}
+        <p>NO FAVOURITES YET.</p>
+    {%endif%}
+</div>
+
 {%endblock%}
 
 {% block script %}

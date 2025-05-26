@@ -26,7 +26,7 @@ class Product(db.Model):
         self.price = price
         self.stock = stock
         
-        self.picture = "https://raw.githubusercontent.com/Tyrell-Lewis/E-commer-Website/refs/heads/main/images/landingPageImages/asus.jpg"
+        self.picture = "/static/landingPageImages/asus.jpg"
         # self.stats_Affected = stats_Affected
 
     def get_id(self):

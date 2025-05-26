@@ -4,6 +4,10 @@ import textwrap
 
 from App.models import Customer, User #,  Staff, Review
 
+from App.controllers import(
+    get_favourite_products, toggle_favourite_product
+)
+
 # from App.controllers import (
 #     get_student_by_UniId, get_student_by_id,
 #     get_staff_by_id, get_staff_by_id, create_review, get_karma,
@@ -22,6 +26,11 @@ Page/Action Routes
 
 @favourite_views.route("/favourites", methods=["GET"])
 def favourites_page():
-    
-    return render_template("favouritesPage.html")
+    favourites = get_favourite_products(current_user.get_id())
+    print(f'The favourites are: {favourites}')
+    return render_template("favouritesPage.html", favourites=favourites)
 
+@favourite_views.route("/toggleFavourites/<int:item_id>", methods=["POST"])
+def toggle_favourites(item_id):
+    toggle_favourite_product(customer_id=current_user.get_id(), product_id=item_id)
+    return redirect (request.referrer)

@@ -9,7 +9,9 @@ class Customer(User):
     customerCart = db.relationship('Cart', backref='customer', uselist=False,  # This enforces one-to-one 
         cascade="all, delete-orphan", passive_deletes=True, lazy='joined')
     
-
+    favouriteProducts = db.relationship('FavouriteItem', backref='customer', cascade="all, delete-orphan", passive_deletes=True, lazy='joined')
+    orders = db.relationship('Order', backref='customer', cascade="all, delete-orphan", passive_deletes=True, lazy='joined')
+#items = db.relationship('OrderItem', backref='order', cascade="all, delete-orphan", passive_deletes=True)
     
     # favouriteDrills = db.relationship('Drill', secondary=favourite_drills, backref='favourited_by',lazy='joined')
 
@@ -27,7 +29,7 @@ class Customer(User):
                         lastname=lastname,
                         email=email,
                         password=password)
-        # self.favouriteDrills = []
+        #self.favouriteProducts = []
         # self.drills =[]
         self.profile_pic = "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255634-stock-illustration-avatar-icon-male-profile-gray.jpg"
 
@@ -42,7 +44,7 @@ class Customer(User):
             "firstname":self.firstname,
             "lastname":self.lastname,
             "email":self.email
-            # "favouriteDrills": [drill.to_json() for drill in self.favouriteDrills],
+            #"favouriteProducts": [product.to_json() for product in self.favouriteProducts],
             # "Drills": [drill.to_json() for drill in self.drills]
         }
 

@@ -1,10 +1,14 @@
-from App.models import Product, Cart, CartItem
+from App.models import Product, Cart, CartItem, FavouriteItem
 from App.database import db
 import ast
 from sqlalchemy.exc import SQLAlchemyError
 
 from .cart import(
     create_cart, get_cart_by_id
+)
+
+from .customer import(
+    get_customer_by_id
 )
 
 #Switch the names from itme to product eventually, just not right now
@@ -169,3 +173,57 @@ def update_item_in_cart(item_id, cart_id, customer_id, quantity):
         print(f"[DB ERROR] add_item_to_cart: {e}")
         db.session.rollback()
         return False
+
+
+def toggle_favourite_product(customer_id, product_id):
+    try:
+
+        existing_customer = get_customer_by_id(customer_id)
+        
+        if not existing_customer:
+            return None
+
+        existing_product = get_item_by_id(product_id)
+
+        if not existing_product:
+            return None
+
+        existing_favourite = FavouriteItem.query.filter_by(customerID=existing_customer.ID, productID=existing_product.ID).first()
+
+        if not existing_favourite:
+            new_favourite = FavouriteItem(customerID=existing_customer.ID, productID=existing_product.ID)
+
+            if new_favourite:
+                db.session.add(new_favourite)
+                db.session.commit()
+                print("Added to favourites")
+                return True
+            else:
+                return None
+        else:
+            db.session.delete(existing_favourite)
+            db.session.commit()
+            print("Remove from favourites")
+            return False
+    except SQLAlchemyError as e:
+        print(f"[DB ERROR] toggle_favourite_product: {e}")
+        db.session.rollback()
+        return None
+
+
+def get_favourite_products(customer_id):
+    try:
+        existing_customer= get_customer_by_id(customer_id)
+
+        if not existing_customer:
+            return None
+
+        favourites = FavouriteItem.query.filter_by(customerID=existing_customer.ID).all()
+
+        if favourites:
+            return favourites
+        else:
+            return None
+    except SQLAlchemyError as e:
+        print(f'[DB_ERROR] Could not complete get_favourite_products: as {e}')
+        return None
