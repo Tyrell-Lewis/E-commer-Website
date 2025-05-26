@@ -46,5 +46,6 @@ def create_cart(customer_id):
                 return None
     except SQLAlchemyError as e:
         print(f'[DB_ERROR] create_cart: {e}')
+        db.session.rollback()
         return None
 

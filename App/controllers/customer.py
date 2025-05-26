@@ -12,10 +12,11 @@ from sqlalchemy.exc import SQLAlchemyError
 
 
 def create_customer(username, firstname, lastname, email, password):
-    newCustomer = Customer(username, firstname, lastname, email, password)
-    db.session.add(newCustomer)
-    
     try:
+        newCustomer = Customer(username, firstname, lastname, email, password)
+        db.session.add(newCustomer)
+    
+    
         db.session.commit()
         return True
     except Exception as e:

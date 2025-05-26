@@ -9,7 +9,8 @@ from App.models import Customer, User, Order #,  Staff, Review
 from App.controllers import(
     add_item_to_cart, remove_item_from_cart, update_item_in_cart,
     get_customer_cart, get_customer_cart_id, get_cart_by_id, 
-    get_customer_by_id
+    get_customer_by_id,
+    create_order, update_order
 )
 
 order_views = Blueprint('order_views',
@@ -18,21 +19,6 @@ order_views = Blueprint('order_views',
 '''
 Page/Action Routes
 '''
-
-# stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
-
-# @stripe_routes.route('/payment-success')
-# def payment_success():
-#     session_id = request.args.get('session_id')
-#     session = stripe.checkout.Session.retrieve(session_id)
-    
-#     # Mark order as paid
-#     order = Order.query.filter_by(stripe_session_id=session_id).first()
-#     if order:
-#         order.status = 'paid'
-#         db.session.commit()
-
-#     return "Payment successful! Thank you for your order."
 
 @order_views.route("/success", methods=["GET"])
 def checkout_success():
@@ -48,60 +34,41 @@ def checkout_cancel():
 
 @order_views.route('/checkout', methods=['POST'])
 def create_checkout_session():
-    #data = request.get_json()
-    #cart_items = data.get('items')  # Format: list of dicts [{name, price, quantity}]
-    #customer_id = data.get('customer_id')
+
+    #For right now, i hard encoded the data, i will make this dynamic to work with the data in
+    # of the cart items and use that to populate the line items.
+
     customer_id = current_user.get_id()
 
-    try:
-        # Transform cart items into Stripe line items
-        line_items = [{
-                'price_data': {
-                    'currency': 'usd',
-                    'unit_amount': 2999,  # in cents
-                    'product_data': {
-                        'name': "blue dragon t-shirt",
-                    },
+    line_items = [{
+            'price_data': {
+                'currency': 'usd',
+                'unit_amount': 2999,  # in cents is 29.99, Stripe uses integers so its 2999 to represent 29.99
+                'product_data': {
+                    'name': "blue dragon t-shirt",
                 },
-                'quantity': 2,
-            }]
-        total_amount = 29.99
-        # for item in cart_items:
-        #     line_items.append({
-        #         'price_data': {
-        #             'currency': 'usd',
-        #             'unit_amount': 2999,  # in cents
-        #             'product_data': {
-        #                 'name': "blue dragon t-shirt",
-        #             },
-        #         },
-        #         'quantity': 2,
-        #     })
-        #     total_amount = 29.99
+            },
+            'quantity': 5,
+        }]
+    total_amount = 29.99
 
-        # Create Stripe checkout session
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=line_items,
-            mode='payment',
-            success_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/success',
-            cancel_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/cancel',
-        )
 
-        # Store order in DB (status = pending)
-        new_order = Order(
-            customerID=customer_id,
-            total_amount=total_amount,
-            stripe_session_id=checkout_session.id,
-            stripe_payment_intent=checkout_session.payment_intent,
-            status='pending'
-        )
-        db.session.add(new_order)
-        db.session.commit()
+    # Create Stripe checkout session, just follow the stripe docs to make this and append to it in future.
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=line_items,
+        mode='payment',
+        success_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/cancel',
+    )
 
-        return redirect(checkout_session.url)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+    create_order(customer_id=customer_id, total_amount=total_amount, 
+        stripe_session_id=checkout_session.id,
+        stripe_payment_intent=checkout_session.payment_intent,
+        status='pending'
+    )
+
+    return redirect(checkout_session.url)
 
 
 @order_views.route('/webhook/stripe', methods=['POST'])
@@ -123,9 +90,11 @@ def stripe_webhook():
         checkout_session = event['data']['object']
         checkout_session_id = checkout_session.get('id')
 
-        order = Order.query.filter_by(stripe_session_id=checkout_session_id).first()
-        if order:
-            order.status = 'paid'
-            db.session.commit()
+        update_order(customer_id = current_user.get_id(), stripe_session_id=checkout_session_id)
+
+        # order = Order.query.filter_by(stripe_session_id=checkout_session_id).first()
+        # if order:
+        #     order.status = 'paid'
+        #     db.session.commit()
 
     return jsonify({'status': 'success'})

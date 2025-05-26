@@ -106,6 +106,7 @@ def add_item_to_cart(item_id, cart_id, customer_id, quantity):
         return True
     except SQLAlchemyError as e:
         print(f"[DB ERROR] add_item_to_cart: {e}")
+        db.session.rollback()
         return False
 
 
@@ -132,6 +133,7 @@ def remove_item_from_cart(item_id, cart_id, customer_id):
             return False
     except SQLAlchemyError as e:
         print(f"[DB ERROR] add_item_to_cart: {e}")
+        db.session.rollback()
         return False
 
 
@@ -165,4 +167,5 @@ def update_item_in_cart(item_id, cart_id, customer_id, quantity):
             return False
     except SQLAlchemyError as e:
         print(f"[DB ERROR] add_item_to_cart: {e}")
+        db.session.rollback()
         return False
