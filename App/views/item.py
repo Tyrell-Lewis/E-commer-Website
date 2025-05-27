@@ -53,3 +53,32 @@ def search():
     results = Product.query.filter(search_filter).all()
 
     return render_template("landingPage.html", items=results)
+
+
+@item_views.route("/live_search", methods=["GET"])
+def live_search():
+    query = request.args.get('searchQuery', '').strip()
+
+    if not query:
+        print("nothing")
+        return jsonify([])
+
+    #Search working with page reload right now. How it works is that it gets the form query for searching, and uses what is there to match against all instances in the product model.
+    search_filter = or_(
+        Product.name.ilike(f'%{query}%'),
+        Product.brand.ilike(f'%{query}%'),
+        Product.colour.ilike(f'%{query}%'),
+        Product.clothing_type.ilike(f'%{query}%'),
+        #Product.description.ilike(f'%{query}%') Maybe have description but doesnt make senes right now, since the descriptions are all the same for testing.
+    )
+
+    results = Product.query.filter(search_filter).all()
+
+    products_json = [product.get_json() for product in results]
+
+    if results:
+        print("yes")
+    else:
+        print("no")
+
+    return jsonify(products_json)

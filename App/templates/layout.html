@@ -474,11 +474,15 @@
             <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a>
 
             <div class="search" title="Make an icon and used to search for different items by name">
-                <form method="GET" action="/search" id="searchForm" style="display:flex;">
+                <!-- <form method="GET" action="/search" id="searchForm" style="display:flex;">
                     <input type="text" name="searchQuery" placeholder="Search here..." required>
                     <button type="submit">Search</button>
-                </form>
+                </form> -->
+
+                <input type="text" id="searchInput" placeholder="Search here...">
             </div>
+
+            <div id="searchResults"></div>
             <!-- Profile Options -->
             <div class="profile-container">
                 <div class="more">
@@ -651,6 +655,78 @@
         </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <!-- <script>
+        const input = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('searchResults');
+
+        input.addEventListener('input', async () => {
+            const query = input.value.trim();
+
+            if (query === '') {
+                resultsDiv.innerHTML = ''; // clear results if empty
+                return;
+            }
+
+            const response = await fetch(`/live_search?searchQuery=${encodeURIComponent(query)}`);
+            const products = await response.json();
+
+            if (products.length === 0) {
+                resultsDiv.innerHTML = '<p>No products found.</p>';
+                return;
+            }
+            const html = products.map(p => `
+                <div class="product">
+                    <img src="${p.picture}" alt="${p.name}" width="100" />
+                    <h3>${p.name}</h3>
+                    <p>Brand: ${p.brand}</p>
+                    <p>Color: ${p.colour}</p>
+                    <p>Type: ${p.clothing_type}</p>
+                    <p>Price: $${p.price.toFixed(2)}</p>
+                </div>
+            `).join('');
+
+            resultsDiv.innerHTML = html;
+        });
+    </script> -->
+
+    <script>
+        const input = document.getElementById('searchInput')
+
+        const resultsDiv = document.getElementById('searchResults');
+
+        input.addEventListener('input', async () => {
+            const query = input.value.trim()
+
+            if (!query){
+                resultsDiv.innerHTML = '';
+                return;
+            }
+
+            const response = await fetch (`/live_search?searchQuery=${encodeURIComponent(query)}`);
+            const products = await response.json();
+
+            if(!products || products.length === 0){
+                resultsDiv.innerHTML = '<p>No Products Found!<p>';
+                return;
+            }
+
+            let html = '';
+
+            for (let p of products){
+                html = html +
+                    `<div class="product"> 
+                        <h3>${p.name}</h3>
+                        <p>${p.colour}</P>
+                        
+                     </div>`;
+            }
+
+            resultsDiv.innerHTML = html;
+        });
+        
+    </script>
 
         
     </body>

@@ -43,6 +43,6 @@ class Product(db.Model):
             "clothing_type": self.clothing_type,  # Format the date/time
             'price': self.price,
             'stock': self.stock,
-            'availability': self.availability
-
+            'availability': self.availability,
+            'picture': self.picture
         }
