@@ -5,7 +5,7 @@ from sqlalchemy import or_
 
 from App.models import Customer, User, Product #,  Staff, Review
 from App.controllers import (
-    sell_item, get_all_items
+    sell_item, get_all_items, get_item_by_id
 )
 
 
@@ -22,6 +22,14 @@ def index_page():
 
     items = get_all_items()
     return render_template("landingPage.html", items=items)
+
+
+@item_views.route("/product/<int:item_id>", methods=["GET"])
+def product_page(item_id):
+    
+
+    item = get_item_by_id(item_id)
+    return render_template("productPage.html", item=item)
 
 @item_views.route("/cartPage", methods=["GET"])
 def cart_page():

@@ -337,6 +337,37 @@
                 margin-left: auto;
                 margin-right: 25px;
                 left: auto;
+                position: relative;
+                display: inline-block;
+            }
+
+            .more-menu {
+                position: absolute;
+                top: 100%;
+                z-index: 900;
+                width: 100px;
+                min-width: min-content;
+                float: left;
+                padding: 10px 0;
+                margin-top: 9px;
+                
+                background-color: #fff;
+                border: 1px solid #ccd8e0;
+                border-radius: 4px;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+                opacity: 0;
+                transform: translate(0, 15px) scale(0.95);
+                transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+                pointer-events: none;
+            }
+
+            .dropdown-results{
+                position: absolute;
+                top: 100%;
+                width: max-content;
+                right: 0;
+                background-color: navy;
+                
             }
 
 
@@ -473,16 +504,22 @@
 
             <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a>
 
-            <div class="search" title="Make an icon and used to search for different items by name">
-                <!-- <form method="GET" action="/search" id="searchForm" style="display:flex;">
+
+
+             <!-- <form method="GET" action="/search" id="searchForm" style="display:flex;">
                     <input type="text" name="searchQuery" placeholder="Search here..." required>
                     <button type="submit">Search</button>
                 </form> -->
 
+
+
+            <div class="search" title="Make an icon and used to search for different items by name">
+               
+
                 <input type="text" id="searchInput" placeholder="Search here...">
+                <div id="searchResults" class="dropdown-results"></div>
             </div>
 
-            <div id="searchResults"></div>
             <!-- Profile Options -->
             <div class="profile-container">
                 <div class="more">
@@ -656,41 +693,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-
-    <!-- <script>
-        const input = document.getElementById('searchInput');
-        const resultsDiv = document.getElementById('searchResults');
-
-        input.addEventListener('input', async () => {
-            const query = input.value.trim();
-
-            if (query === '') {
-                resultsDiv.innerHTML = ''; // clear results if empty
-                return;
-            }
-
-            const response = await fetch(`/live_search?searchQuery=${encodeURIComponent(query)}`);
-            const products = await response.json();
-
-            if (products.length === 0) {
-                resultsDiv.innerHTML = '<p>No products found.</p>';
-                return;
-            }
-            const html = products.map(p => `
-                <div class="product">
-                    <img src="${p.picture}" alt="${p.name}" width="100" />
-                    <h3>${p.name}</h3>
-                    <p>Brand: ${p.brand}</p>
-                    <p>Color: ${p.colour}</p>
-                    <p>Type: ${p.clothing_type}</p>
-                    <p>Price: $${p.price.toFixed(2)}</p>
-                </div>
-            `).join('');
-
-            resultsDiv.innerHTML = html;
-        });
-    </script> -->
-
     <script>
         const input = document.getElementById('searchInput')
 
@@ -716,11 +718,11 @@
 
             for (let p of products){
                 html = html +
-                    `<div class="product"> 
+                    `<a href="/product/${p.item_id}"><div class="product"> 
                         <h3>${p.name}</h3>
                         <p>${p.colour}</P>
                         
-                     </div>`;
+                     </div></a>`;
             }
 
             resultsDiv.innerHTML = html;

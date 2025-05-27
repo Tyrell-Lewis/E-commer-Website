@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}       {% endblock %}
+{% block page %}        {% endblock %}
+
+{% block style %}
+<style>
+    
+
+
+</style>
+{%endblock%}
+
+
+{%block navbar_tabs%}
+
+{%endblock%}
+
+
+{{ super() }}
+
+{%block content%}
+ 
+<p>Product page goes here</p>
+
+<div>
+    {%if item%}
+        <P>Item ID: {{item.ID}} </P>
+        <p>Name: {{item.name}} </p>
+    {%else%}
+        <p>You shouldnt see this, at all ......</p>
+    {%endif%}
+</div>
+
+{%endblock%}
+
+{% block script %}
+<script>
+
+</script>
+{% endblock %}
