@@ -59,12 +59,13 @@ def create_checkout_session():
     total_amount = 29.99
 
     # Create Stripe checkout session, just follow the stripe docs to make this and append to it in future.
+    #Gitpod changes the url on new workspaces, so on erros, change these ur;s to mathc, and also change the stripe webhook destination to match.
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/success',
-        cancel_url='https://8080-tyrelllewis-ecommerwebs-cqoufjyjoyv.ws-us119.gitpod.io/cancel',
+        success_url='https://8080-tyrelllewis-ecommerwebs-twui2vkktnq.ws-us119.gitpod.io/success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-twui2vkktnq.ws-us119.gitpod.io/cancel',
     )
 
     create_order(customer_id=customer_id, total_amount=total_amount, 
@@ -95,6 +96,7 @@ def stripe_webhook():
         checkout_session = event['data']['object']
         checkout_session_id = checkout_session.get('id')
 
-        update_order(customer_id = current_user.get_id(), stripe_session_id=checkout_session_id)
+        #Current user does not work here, because this call is made remotely from stripe, not taking into account 
+        update_order(stripe_session_id=checkout_session_id)
 
     return jsonify({'status': 'success'})

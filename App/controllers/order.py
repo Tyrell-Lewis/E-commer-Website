@@ -68,13 +68,13 @@ def create_order (customer_id, total_amount, status, stripe_session_id, stripe_p
         return None
 
 
-def update_order (customer_id, stripe_session_id):
+def update_order (stripe_session_id):
 
     try:
-        existing_customer = get_customer_by_id(customer_id)
+        # existing_customer = get_customer_by_id(customer_id)
 
-        if not existing_customer:
-            return None
+        # if not existing_customer:
+        #     return None
 
         existing_order = Order.query.filter_by(stripe_session_id=stripe_session_id).first()
         if existing_order:

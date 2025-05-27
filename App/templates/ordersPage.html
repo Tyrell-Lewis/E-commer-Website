@@ -24,7 +24,10 @@
 
 <div>
     {%if orders%}
-        <p>Orders are present</p>
+        {%for order in orders%}
+            <p>Order no.: {{order.ID}} </p>
+            <P>Order status: {{order.status}} </P>
+        {%endfor%}
     {%else%}
         <p>NO ORDERS YET.</p>
     {%endif%}
