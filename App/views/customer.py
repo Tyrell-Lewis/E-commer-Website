@@ -14,12 +14,6 @@ customer_views = Blueprint('customer_views',
 Page/Action Routes
 '''
 
-@customer_views.route("/Home", methods=["GET"])
-def index_page():
-    flash(f"Message pop up works!")
-
-    items = get_all_items()
-    return render_template("landingPage.html", items=items)
 
 
 @customer_views.route("/profile", methods=["GET"])

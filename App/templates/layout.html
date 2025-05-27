@@ -473,7 +473,12 @@
 
             <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a>
 
-            <div class="search" title="Make an icon and used to search for different items by name">Search</div>
+            <div class="search" title="Make an icon and used to search for different items by name">
+                <form method="GET" action="/search" id="searchForm" style="display:flex;">
+                    <input type="text" name="searchQuery" placeholder="Search here..." required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
             <!-- Profile Options -->
             <div class="profile-container">
                 <div class="more">
