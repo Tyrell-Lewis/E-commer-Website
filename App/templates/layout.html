@@ -7,15 +7,19 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
         <style>
-            body {
+            html,body {
                 font-family: "Roboto", sans-serif;
                 margin: 0;
-                padding: 5px;
+                padding: 0;
+                height: 100%;
                 background-color: #7c90a0;
                 transition: margin-left 0.5s;
+                display: flex;
+                flex-direction: column;
             }
 
             a {
@@ -24,6 +28,7 @@
             }
 
             main {
+                flex: 1 0 auto;
                 padding-top: 100px; /* This offsets the navbar height */
             }
 
@@ -336,6 +341,7 @@
             .search {
                 margin-left: auto;
                 margin-right: 25px;
+                width:fit-content;
                 left: auto;
                 position: relative;
                 display: inline-block;
@@ -368,6 +374,19 @@
                 right: 0;
                 background-color: navy;
                 
+            }
+
+            .webSiteTitle{
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            footer {
+                /* position: fixed; */
+                bottom: 0;
+                left: 0;
+                width: 100%; 
+                z-index: 1000; /* above other content */
             }
 
 
@@ -496,29 +515,24 @@
 
             <div class="navbar-tabs"> {%block navbar_tabs%} {%endblock%} </div>
 
-            <a href="/Home"><div style="padding-right: 20px;">Website Name here</div></a>
-
-            <a href="/cartPage"><div title="Make an icon, and just has the items added to the cart" style="padding-right: 20px;"> Cart</div></a>
+            <a href="/Home"><div class="webSiteTitle" style="padding-right:20px;">Website Name here</div></a>
 
             <a href="/contactPage"><div title="Make an icon, and just a page for them to promote their diferent social media accounts" style="padding-right: 20px;"> Social Media/ Contact</div></a>
 
             <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a>
 
 
-
-             <!-- <form method="GET" action="/search" id="searchForm" style="display:flex;">
+            <div class="search" title="Make an icon and used to search for different items by name">
+               <!-- <form method="GET" action="/search" id="searchForm" style="display:flex;">
                     <input type="text" name="searchQuery" placeholder="Search here..." required>
                     <button type="submit">Search</button>
                 </form> -->
 
-
-
-            <div class="search" title="Make an icon and used to search for different items by name">
-               
-
                 <input type="text" id="searchInput" placeholder="Search here...">
                 <div id="searchResults" class="dropdown-results"></div>
             </div>
+
+            <a href="/cartPage"><div title="Make an icon, and just has the items added to the cart" style="padding-right: 20px;"> Cart</div></a>
 
             <!-- Profile Options -->
             <div class="profile-container">
@@ -586,6 +600,54 @@
             {% endif %} {% endwith %}
 
         
+
+        <f<footer class="page-footer grey darken-3">
+  <div class="footer-container">
+    <div class="row">
+      
+      <!-- Column 1: Sitemap -->
+      <div class="col s12 m6">
+        <h6 class="white-text">Sitemap</h6>
+        <p>Fill these list items with links to site pages, or remove column completely.</p>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="/Home">Home</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Support -->
+      <div class="col s12 m6">
+        <h6 class="white-text">Support</h6>
+        <p>Maybe put a page which shows the location fo the business on google maps, or just remove the location if strictly online, orther wise place links to relvent links here</p>
+        <p>Undecided whether to have apage apecific to contact to have the phone umber and Ui to allow sending a support email, or just have the emaila dn phone no. be  text written here.</p>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#">Contact Us</a></li>
+          <li><a class="grey-text text-lighten-3" href="/supportPage">FAQ</a></li>
+          <li><a class="grey-text text-lighten-3" href="#">Location</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Leave empty or use for something else if needed -->
+      <div class="col s12 m4">
+        <!-- Intentionally left blank or use for extra info -->
+      </div>
+    </div>
+
+    <!-- Footer Bottom Line -->
+    <div class="row" style="margin-bottom: 0;">
+      <div class="col s12 m8 center-on-small-only white-text center-align">
+        © Company Name goes here — All rights reserved.
+      </div>
+      <div class="col s12 m4 right-align">
+        <p>Place links to all the relevant social media here</p>
+        <span class="white-text">Connect with us:</span>
+        <a href="#" class="grey-text text-lighten-3" style="padding-right:3px;"><i class="fab fa-whatsapp fa-lg"></i></a>
+        <a href="#" class="grey-text text-lighten-3" style="padding-right:3px;"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="grey-text text-lighten-3" style="padding-right:3px;"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="#" class="grey-text text-lighten-3" style="padding-right:3px;"><i class="fab fa-facebook fa-lg"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
         {%block script%} {%endblock%}
 
         <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

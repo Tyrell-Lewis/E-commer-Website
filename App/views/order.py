@@ -64,8 +64,8 @@ def create_checkout_session():
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://8080-tyrelllewis-ecommerwebs-fjgyna1az5l.ws-us119.gitpod.io//success',
-        cancel_url='https://8080-tyrelllewis-ecommerwebs-fjgyna1az5l.ws-us119.gitpod.io//cancel',
+        success_url='https://8080-tyrelllewis-ecommerwebs-f5wt4kkx8hb.ws-us120.gitpod.io//success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-f5wt4kkx8hb.ws-us120.gitpod.io/cancel',
     )
 
     create_order(customer_id=customer_id, total_amount=total_amount, 

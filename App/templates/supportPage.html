@@ -20,13 +20,31 @@
 
 {%block content%}
 
-<p>support page goes here</p>
+<div class="FAQ-container">
+  <h4 class="center-align">Frequently Asked Questions</h4>
 
-
+  <ul class="collapsible popout">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">help_outline</i>Question 1 goes here</div>
+      <div class="collapsible-body"><span>Answer 1 Here</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">help_outline</i>Question 1 goes here</div>
+      <div class="collapsible-body"><span>Answer 1 Here</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">help_outline</i>Question 1 goes here</div>
+      <div class="collapsible-body"><span>Answer 1 Here</span></div>
+    </li>
+  </ul>
+</div>
 {%endblock%}
 
 {% block script %}
 <script>
-
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(elems);
+  });
 </script>
 {% endblock %}
