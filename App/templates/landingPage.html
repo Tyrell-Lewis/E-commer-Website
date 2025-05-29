@@ -18,7 +18,32 @@
     object-fit: cover;
     } */
 
-    .carousel {
+
+    .banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f4f8;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .banner img {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .banner h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .banner p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+    }
+
+    /* .carousel {
     width:100%;
     }
 
@@ -30,7 +55,81 @@
     .carousel-item img{
     width: 100%;
     height: auto;
-    }
+    } */
+
+
+      .carousel {
+        width: 100%;
+        margin: 40px auto;
+        /* background-color: #f0f4f8; */
+      }
+      .carousel-item {
+        width: 50% !important;
+        height: 75% !important;
+      }
+      .carousel-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+
+
+      .products-container{
+        background-color: #f0f4f8;
+      }
+
+      .product-catalog {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 40px 20px;
+      }
+      .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background: #fff;
+        text-align: left;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      }
+      
+      .product-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+      .product-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.4rem;
+      }
+      .product-card p {
+        margin: 4px 0;
+        font-size: 0.95rem;
+        color: #444;
+      }
+      .product-card .actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .product-card .actions button,
+      .product-card .actions a {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .product-card .actions button:hover,
+      .product-card .actions a:hover {
+        background-color: #0056b3;
+      }
 
     /* animations */
     section {
@@ -90,41 +189,13 @@
 {{ super() }}
 
 {%block content%}
-<p>Landing page content goes here</p>
+  <section class="banner" data-aos="fade-down" data-aos-duration="800">
+    <img src="/static/your-logo.png" alt="Website Logo" />
+    <h1>Welcome to *Insert store name* Store</h1>
+    <p>Put description here about what the store would eb about or maybe a business memo/ memorandum.</p>
+  </section>
 
-<div>
-  <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
-  {%if items%}
-      {%for item in items%}
-        <button><a href="/product/{{item.ID}}" class="blue-text">View Details</a></button>
-        <form action="/toggleFavourites/{{item.ID}}" method="POST" style="display:inline;">
-            <button type="submit">Toggle favourites</button>
-        </form>
-        <button><a href="/reduce_stock/{{item.ID}}">Reduce stock button here</a></button>
-        <button><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
-        <P>Item name: {{item.name}} </P>
-        <P>Item brand: {{item.brand}} </P>
-        <P>Item description: {{item.description}} </P>
-        <P>Item price: ${{item.price}} </P>
-        <P>Item stock: {{item.stock}} </P>
-        <P>Item colour: {{item.colour}} </P>
-        <P>Item clothing_type: {{item.clothing_type}} </P>
-        <P>Item size: {{item.size}} </P>
-        <p>Item availability: {{item.availability}} </p>
-        <p>Item picture:</p>
-        <img src="{{item.picture}}" style="width: 20%;">
-      {%endfor%}
-  {%else%}
-      <P>There are no items</P>
-  {%endif%}
-
-
-</div>
-
-
-
-  <section>
-    <div class="carousel" style="width: 100%;">
+    <div class="carousel" data-aos="fade-up" data-aos-delay="300" style="width: 100%;">
         <a class="carousel-item" href="#one!"><img src="/static/landingPageImages/asus.jpg" alt="Local image not found"></a>
         <a class="carousel-item" href="#two!" ><img src="/static/landingPageImages/background.jpg"></a>
         <a class="carousel-item" href="#three!" ><img src="/static/landingPageImages/zidane.jpg"></a>
@@ -132,27 +203,46 @@
         <a class="carousel-item" href="#five!" ><img src="/static/landingPageImages/Ship2.jpg" style="width:fit-container"></a>
         <a class="carousel-item" href="#six!" ><img src="/static/landingPageImages/Alien_ship.jpg"></a>
     </div>
-  </section>
 
-  <section class="section2" data-aos="zoom-in" data-aos-delay="200">
-    <h1><div class="step-container">
-        <div class="sticky">
-          <div class="step" id="step1">Step 1: Welcome</div>
-          <div class="step" id="step2">Step 2: Features</div>
-          <div class="step" id="step3">Step 3: Experience</div>
-          <div class="step" id="step4">Step 4: Continue</div>
-        </div>
-      </div></h1>
-  </section>
-  
+  <div class="products-container" data-aos="fade-in" data-aos-delay="600">
+    <div class="row">
+      {% if items %}
+        {% for item in items %}
+          <div class="col s12 m4 l3">
+            <div class="card">
+              <div class="card-image">
+                <img src="{{ item.picture }}" alt="{{ item.name }}" style="height: 250px; object-fit: cover;">
+                <a href="/product/{{ item.ID }}" class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">info</i></a>
+              </div>
+              <div class="card-content">
+                <span class="card-title">{{ item.name }}</span>
+                <p>{{item.description}} </p>
+                <p><strong>Price:</strong> ${{ item.price }}</p>
+                <P>Item name: {{item.name}} </P>
+                <P>Item brand: {{item.brand}} </P>
+                <p>{{ item.description[:20] }}{% if item.description|length > 20 %}...{% endif %}</p>
+                <P>Item price: ${{item.price}} </P>
+                <P>Item stock: {{item.stock}} </P>
+                <P>Item colour: {{item.colour}} </P>
+                <P>Item clothing_type: {{item.clothing_type}} </P>
+                <P>Item size: {{item.size}} </P>
+                <p>Item availability: {{item.availability}} </p>
+              </div>
+              <div class="card-action">
+                <form action="/toggleFavourites/{{ item.ID }}" method="POST" style="display:inline;">
+                  <button type="submit" class="btn-small blue lighten-2">Add to Favourites</button>
+                </form>
+                <a href="/addToCart/{{ item.ID }}" class="btn-small green">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>There are no items</p>
+      {% endif %}
+    </div>
+  </div>
 
-  <section class="section3" data-aos="flip-left" data-aos-duration="1000">
-    <h1>Flip Left with Custom Duration</h1>
-  </section>
-
-  <section class="section1" data-aos="fade-up">
-    <h1>Fade Up on Scroll</h1>
-  </section>
 
 {%endblock%}
 

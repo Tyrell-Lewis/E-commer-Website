@@ -5,7 +5,38 @@
 {% block style %}
 <style>
     
-
+  .cancel-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid #f44336;
+    border-radius: 12px;
+    background-color: #ffebee;
+    color: #c62828;
+    font-family: 'Arial', sans-serif;
+  }
+  .cancel-container h2 {
+    margin-bottom: 20px;
+  }
+  .cancel-container p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+  .btn-home {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-home:hover {
+    background-color: #b71c1c;
+  }
 
 </style>
 {%endblock%}
@@ -19,8 +50,13 @@
 {{ super() }}
 
 {%block content%}
-<p>Cancel page here after a payment, a msg to say that the payment was either unsuccesful, or cancelled by the user for whatever reason.</p>
-
+<div class="cancel-container">
+  <h2>Payment Cancelled</h2>
+  <p>Your payment was not completed. This may be because you cancelled the payment, it was unsuccessful or you exited the checkout page accidentally.</p>
+  <p>If you wish to try again, you can return to your <strong>shopping cart</strong> or re-try accidental checkout leaves by viewing your <strong>order</strong> history.</p>
+  <a href="/cartPage" class="btn-home">Go to Cart</a>
+  <a href="/ordersPage" class="btn-home">Go to Order History</a>
+</div>
 
 {%endblock%}
 

@@ -5,7 +5,38 @@
 {% block style %}
 <style>
     
-
+  .success-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-family: 'Arial', sans-serif;
+  }
+  .success-container h2 {
+    margin-bottom: 20px;
+  }
+  .success-container p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+  .btn-orders {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-orders:hover {
+    background-color: #388e3c;
+  }
 
 </style>
 {%endblock%}
@@ -19,10 +50,12 @@
 {{ super() }}
 
 {%block content%}
-<p>Success page after a payment, just a confirmationt hat the payment was successful and process properly. Maybe a duration on receiving goods. (For right not just a confirmation msg)</p>
-
-
-
+<div class="success-container">
+  <h2>Payment Successful!</h2>
+  <p>Thank you for your purchase. Your payment has been processed successfully.</p>
+  <p>Your order will be processed shortly and you will receive your goods within the expected delivery time.</p>
+  <a href="/ordersPage" class="btn-orders">View Your Orders</a>
+</div>
 
 {%endblock%}
 
