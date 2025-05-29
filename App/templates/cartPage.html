@@ -38,41 +38,6 @@
 {{ super() }}
 
 {%block content%}
- 
-<!-- <p>cart page goes here</p>
-
-<div>
-    {%if cart%}
-
-        <form action="/checkout" method="POST">
-            {% for item in cart.items %}
-              <input type="hidden" name="product_id" value="{{ item.productID }}">
-              <input type="hidden" name="product_name" value="{{ item.product.name }}">
-              <input type="hidden" name="price" value="{{ item.product.price }}">
-              <input type="hidden" name="quantity" value="{{ item.cart_quantity }}">
-            {% endfor %}
-            <button type="submit">Checkout Now</button>
-          </form>
-        <p>Cart id: {{cart.ID}} </p>
-        {%for item in cart.items%}
-            <button><a href="/removeFromCart/{{item.productID}}">Remove from cart here</a></button> 
-            <button><a href="/updateInCart/{{item.productID}}">update price cart here</a></button>
-            <p>Item name: {{item.product.name}} </p>
-            <p>Item quantity: {{item.cart_quantity}} </p>
-            <p>Item description: {{item.product.description}} </p>
-            <P>The cart item id is: {{item.ID}} </P>
-            <p>The product id is: {{item.productID}} </p>
-            <P>The cart id is : {{item.cartID}} </P>
-
-        {%endfor%}
-    {%else%}
-        <P>There are no carts</P>
-    {%endif%}
-
-
-</div> -->
-
-
 <div class="cart-container">
   <h4>Your Shopping Cart</h4>
 
@@ -95,7 +60,6 @@
       {% endfor %}
     </div>
 
-    <!-- Order Summary Column -->
     <div class="col s12 m4">
       <div class="card cart-summary">
         <div class="card-content">

@@ -48,12 +48,10 @@
 <div class="product-page-container">
   {% if item %}
   <div class="row">
-    <!-- Product Image -->
     <div class="col s12 m6">
       <img src="{{item.picture}}" alt="{{ item.name }}" class="product-image">
     </div>
 
-    <!-- Product Info -->
     <div class="col s12 m6 product-details">
       <h4>{{ item.name }}</h4>
       <p><strong>Price:</strong> ${{ item.price }}</p>

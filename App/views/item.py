@@ -31,6 +31,13 @@ def product_page(item_id):
     item = get_item_by_id(item_id)
     return render_template("productPage.html", item=item)
 
+@item_views.route("/allProducts", methods=["GET"])
+def all_products_page():
+    
+
+    items = get_all_items()
+    return render_template("allProductsPage.html", items=items)
+
 @item_views.route("/cartPage", methods=["GET"])
 def cart_page():
     

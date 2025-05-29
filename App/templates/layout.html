@@ -367,14 +367,100 @@
                 pointer-events: none;
             }
 
-            .dropdown-results{
+            /* .dropdown-results{
                 position: absolute;
                 top: 100%;
                 width: max-content;
                 right: 0;
                 background-color: navy;
                 
+            } */
+
+            .dropdown-results {
+            position: absolute;
+            top: 100%;              /* right below the input */
+            right: 0;               /* aligned to the right edge of the input */
+            min-width: 250px;       /* reasonable min width */
+            max-width: 400px;       /* max width for larger screens */
+            background-color: #a3dce4; /* dark navy background */
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 6px;
+            overflow-y: auto;       /* scroll if too many results */
+            max-height: 300px;      /* max height for scroll */
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
+
+            /* Each product link container */
+            .dropdown-results a {
+            display: block;
+            padding: 8px 12px;           /* a bit smaller padding for tighter fit */
+            text-decoration: none;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background-color 0.2s ease;
+            }
+
+            /* Last item: no border */
+            .dropdown-results a:last-child {
+            border-bottom: none;
+            }
+
+            /* Hover effect */
+            .dropdown-results a:hover {
+            background-color: #094582;
+            cursor: pointer;
+            }
+
+            /* Main product container flex */
+            .product-result {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            }
+
+            /* Thumbnail image */
+            .product-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            }
+
+            /* Text container */
+            .product-info {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            flex-grow: 1;
+            min-width: 0; /* important for text truncation */
+            }
+
+            /* Product name */
+            .product-info h3 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            }
+
+            /* Additional info text */
+            .product-info p {
+            margin: 1px 0;
+            font-size: 0.85rem;
+            opacity: 0.75;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            }
+
+
+
 
             .webSiteTitle{
                 margin-left:auto;
@@ -490,6 +576,7 @@
             >&times;</a
             >
             <a href="/Home">Home</a>
+            <a href="/allProducts">Products (have it expand to show filters by different kinds of products too, actually no just all products right now)</a>
 
             
     
@@ -514,13 +601,13 @@
             </div> -->
             <div class="navbar-title">{% block page %}{% endblock %}</div>
 
-            <div class="navbar-tabs"> {%block navbar_tabs%} {%endblock%} </div>
+            <!-- <div class="navbar-tabs"> {%block navbar_tabs%} {%endblock%} </div> -->
 
-            <a href="/Home"><div class="webSiteTitle" style="padding-right:20px;">Website Name here</div></a>
+            <a href="/Home"><div class="webSiteTitle" style="padding-right:20px;">Website Name here (Make either a logog or 3-4 letters max fo smaller screens</div></a>
 
-            <a href="/contactPage"><div title="Make an icon, and just a page for them to promote their diferent social media accounts" style="padding-right: 20px;"> Social Media/ Contact</div></a>
+            <!-- <a href="/contactPage"><div title="Make an icon, and just a page for them to promote their diferent social media accounts" style="padding-right: 20px;"> Social Media/ Contact</div></a>
 
-            <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a>
+            <a href="/supportPage"><div title="Make an icon, Supprot page or FAQ on how to use website or get in contact with them etc" style="padding-right: 20px;"> Support/ FAQ</div></a> -->
 
 
             <div class="search" title="Make an icon and used to search for different items by name">
@@ -529,7 +616,7 @@
                     <button type="submit">Search</button>
                 </form> -->
 
-                <input type="text" id="searchInput" placeholder="Search here...">
+                <input type="text" id="searchInput" placeholder="Search...">
                 <div id="searchResults" class="dropdown-results"></div>
             </div>
 
@@ -580,10 +667,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="test">
-                <p>just a test</p>
-            </div> -->
         </nav>
 
 
@@ -606,7 +689,6 @@
             <div class="footer-container">
                 <div class="row">
                 
-                <!-- Column 1: Sitemap -->
                 <div class="col s12 m6">
                     <h6 class="white-text">Sitemap</h6>
                     <p>Fill these list items with links to site pages, or remove column completely.</p>
@@ -615,7 +697,6 @@
                     </ul>
                 </div>
 
-                <!-- Column 2: Support -->
                 <div class="col s12 m6">
                     <h6 class="white-text">Support</h6>
                     <p>Maybe put a page which shows the location fo the business on google maps, or just remove the location if strictly online, orther wise place links to relvent links here</p>
@@ -626,14 +707,8 @@
                     <li><a class="grey-text text-lighten-3" href="#">Location</a></li>
                     </ul>
                 </div>
-
-                <!-- Column 3: Leave empty or use for something else if needed -->
-                <div class="col s12 m4">
-                    <!-- Intentionally left blank or use for extra info -->
-                </div>
                 </div>
 
-                <!-- Footer Bottom Line -->
                 <div class="row" style="margin-bottom: 0;">
                 <div class="col s12 m8 center-on-small-only white-text center-align">
                     © Company Name goes here — All rights reserved.
@@ -781,11 +856,18 @@
 
             for (let p of products){
                 html = html +
-                    `<a href="/product/${p.item_id}"><div class="product"> 
-                        <h3>${p.name}</h3>
-                        <p>${p.colour}</P>
-                        
-                     </div></a>`;
+                    `<a href="/product/${p.item_id}" class="product-link">
+                        <div class="product-result">
+                            <div class="product-info">
+                            <h3>${p.name}</h3>
+                            <p class="type-price">
+                                <span class="product-type">${p.clothing_type || 'N/A'}</span> | 
+                                <span class="product-price">$${p.price.toFixed(2)}</span>
+                            </p>
+                            </div>
+                            <img src="${p.picture}" alt="${p.name}" class="product-thumb" />
+                        </div>
+                     </a>`;
             }
 
             resultsDiv.innerHTML = html;
