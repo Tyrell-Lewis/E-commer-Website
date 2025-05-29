@@ -5,7 +5,26 @@
 {% block style %}
 <style>
 
+  .cart-container {
+    padding: 20px;
+  }
+  .cart-summary {
+    position: sticky;
+    top: 80px;
+    /* z-index:100; */
+  }
+  .cart-item-card {
+    margin-bottom: 20px;
+  }
+  .remove-btn {
+    margin-right: 10px;
+  }
 
+  .empty-state {
+    text-align: center;
+    margin-top: 5rem;
+    color: #9e9e9e;
+  }
 
 </style>
 {%endblock%}
@@ -20,7 +39,7 @@
 
 {%block content%}
  
-<p>cart page goes here</p>
+<!-- <p>cart page goes here</p>
 
 <div>
     {%if cart%}
@@ -36,7 +55,7 @@
           </form>
         <p>Cart id: {{cart.ID}} </p>
         {%for item in cart.items%}
-            <button><a href="/removeFromCart/{{item.productID}}">Remove from cart here</a></button> <!-- Used the productID not ID, since the controller checks that, can change if you want. -->
+            <button><a href="/removeFromCart/{{item.productID}}">Remove from cart here</a></button> 
             <button><a href="/updateInCart/{{item.productID}}">update price cart here</a></button>
             <p>Item name: {{item.product.name}} </p>
             <p>Item quantity: {{item.cart_quantity}} </p>
@@ -51,6 +70,71 @@
     {%endif%}
 
 
+</div> -->
+
+
+<div class="cart-container">
+  <h4>Your Shopping Cart</h4>
+
+  {% if cart and cart.items %}
+  <div class="row">
+    <div class="col s12 m8">
+      {% for item in cart.items %}
+      <div class="card cart-item-card">
+        <div class="card-content">
+          <span class="card-title">{{ item.product.name }}</span>
+          <p>{{ item.product.description }}</p>
+          <p><strong>Price:</strong> ${{ item.product.price }}</p>
+          <p><strong>Quantity:</strong> {{ item.cart_quantity }}</p>
+        </div>
+        <div class="card-action">
+          <a href="/removeFromCart/{{item.productID}}" class="btn red remove-btn">Remove</a>
+          <a href="/updateInCart/{{item.productID}}" class="btn blue lighten-1">Update</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Order Summary Column -->
+    <div class="col s12 m4">
+      <div class="card cart-summary">
+        <div class="card-content">
+          <span class="card-title">Order Summary</span>
+          <p><strong>Cart ID:</strong> {{ cart.ID }}</p>
+          <ul class="collection">
+            {% for item in cart.items %}
+            <li class="collection-item">
+              {{ item.product.name }} x {{ item.cart_quantity }}
+              <span class="right">${{ item.product.price * item.cart_quantity }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+          <p class="right-align">
+            <strong>Total:</strong> $
+            {{cart.cartPrice}}
+          </p>
+        </div>
+        <div class="card-action center">
+          <form action="/checkout" method="POST">
+            {% for item in cart.items %}
+            <input type="hidden" name="product_id" value="{{ item.productID }}">
+            <input type="hidden" name="product_name" value="{{ item.product.name }}">
+            <input type="hidden" name="price" value="{{ item.product.price }}">
+            <input type="hidden" name="quantity" value="{{ item.cart_quantity }}">
+            {% endfor %}
+            <button type="submit" class="btn green">Checkout Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="empty-state">
+      <h5>No Items yet.</h5>
+      <p>Start exploring and add items you love!</p>
+      <a href="/Home" class="btn blue">Browse Products</a>
+    </div>
+  {% endif %}
 </div>
 
 {%endblock%}
