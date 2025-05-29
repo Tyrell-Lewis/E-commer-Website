@@ -66,6 +66,20 @@ def get_all_items():
         print(f"[DB ERROR] get_all_items: {e}")
         return []
 
+
+def get_all_items_by_type(c_type):
+    try:
+
+        items = Product.query.filter_by(clothing_type=c_type).all()
+
+        if items:
+            return items
+        else:
+            return None
+    except SQLAlchemyError as e:
+        print(f"[DB ERROR] get_all_items: {e}")
+        return []
+
 def get_item_by_id(item_id):
     try:
         item = Product.query.filter_by(ID=item_id).first()

@@ -20,5 +20,5 @@ def initialize():
     create_item(name="green dragon t-shirt", brand="brand name", description="Description for green dragon t-shirt",
                  colour="green", size="medium", clothing_type="t-shirt", price=29.99, stock=10)
     create_item(name="purple dragon t-shirt", brand="brand name", description="Description for purple dragon t-shirt",
-                 colour="purple", size="medium", clothing_type="t-shirt", price=29.99, stock=10)
+                 colour="purple", size="medium", clothing_type="shoes", price=29.99, stock=10)
 

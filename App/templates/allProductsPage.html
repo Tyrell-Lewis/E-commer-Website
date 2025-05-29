@@ -4,7 +4,75 @@
 
 {% block style %}
 <style>
-    
+.products-container{
+        background-color: #f0f4f8;
+      }
+
+      .product-catalog {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 40px 20px;
+      }
+      .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background: #fff;
+        text-align: left;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      }
+      
+      .product-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+      .product-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.4rem;
+      }
+      .product-card p {
+        margin: 4px 0;
+        font-size: 0.95rem;
+        color: #444;
+      }
+      .product-card .actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .product-card .actions button,
+      .product-card .actions a {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .product-card .actions button:hover,
+      .product-card .actions a:hover {
+        background-color: #0056b3;
+      }
+
+      .tab-link {
+        text-decoration: none;
+        color: #333;
+        background-color: #e0e0e0;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: background-color 0.2s;
+        }
+        .tab-link:hover {
+        background-color: #007bff;
+        color: white;
+        }
 
 
 </style>
@@ -19,7 +87,67 @@
 {{ super() }}
 
 {%block content%}
- 
+
+
+<div class="filter-header" style="background-color: #ffffff; padding: 20px; border-bottom: 1px solid #ddd;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    
+    <div class="tabs" style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <a href="/allProducts" class="tab-link">All</a>
+      <a href="/allProducts/t-shirt" class="tab-link">T-Shirts</a>
+      <a href="/allProducts/pants" class="tab-link">Pants</a>
+      <a href="#" class="tab-link">Hoodies</a>
+      <a href="/allProducts/shoes" class="tab-link">Shoes</a>
+      <a href="#" class="tab-link">Accessories</a>
+    </div>
+
+    <div style="margin-left: auto;">
+      <button id="filterButton" class="btn-small grey darken-2" style="color: white;">
+        Filter Options
+      </button>
+    </div>
+    
+  </div>
+</div>
+
+<div class="products-container">
+    <div class="row">
+      {% if items %}
+        {% for item in items %}
+          <div class="col s12 m4 l3">
+            <div class="card">
+              <div class="card-image">
+                <img src="{{ item.picture }}" alt="{{ item.name }}" style="height: 250px; object-fit: cover;">
+                <a href="/product/{{ item.ID }}" class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">info</i></a>
+              </div>
+              <div class="card-content">
+                <span class="card-title">{{ item.name }}</span>
+                <p>{{item.description}} </p>
+                <p><strong>Price:</strong> ${{ item.price }}</p>
+                <P>Item name: {{item.name}} </P>
+                <P>Item brand: {{item.brand}} </P>
+                <p>{{ item.description[:20] }}{% if item.description|length > 20 %}...{% endif %}</p>
+                <P>Item price: ${{item.price}} </P>
+                <P>Item stock: {{item.stock}} </P>
+                <P>Item colour: {{item.colour}} </P>
+                <P>Item clothing_type: {{item.clothing_type}} </P>
+                <P>Item size: {{item.size}} </P>
+                <p>Item availability: {{item.availability}} </p>
+              </div>
+              <div class="card-action">
+                <form action="/toggleFavourites/{{ item.ID }}" method="POST" style="display:inline;">
+                  <button type="submit" class="btn-small blue lighten-2">Add to Favourites</button>
+                </form>
+                <a href="/addToCart/{{ item.ID }}" class="btn-small green">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>There are no items</p>
+      {% endif %}
+    </div>
+  </div>
 
 
 {%endblock%}

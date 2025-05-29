@@ -5,7 +5,7 @@ from sqlalchemy import or_
 
 from App.models import Customer, User, Product #,  Staff, Review
 from App.controllers import (
-    sell_item, get_all_items, get_item_by_id
+    sell_item, get_all_items, get_item_by_id, get_all_items_by_type
 )
 
 
@@ -32,10 +32,15 @@ def product_page(item_id):
     return render_template("productPage.html", item=item)
 
 @item_views.route("/allProducts", methods=["GET"])
-def all_products_page():
-    
+@item_views.route("/allProducts/<string:c_type>", methods=["GET"])
+def all_products_page(c_type=None):
 
-    items = get_all_items()
+    valid_types = ['t-shirt', 'pants', 'shoes']
+    
+    if c_type in valid_types:
+        items = get_all_items_by_type(c_type)
+    else:
+        items = get_all_items()
     return render_template("allProductsPage.html", items=items)
 
 @item_views.route("/cartPage", methods=["GET"])

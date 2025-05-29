@@ -15,6 +15,12 @@ def index_page():
   
   return redirect("/Home")
 
+@index_views.route('/location', methods=['GET'])
+def location_page():
+  
+  
+  return render_template("location.html")
+
 @index_views.route('/init', methods=['GET'])
 def init():
   db.drop_all()
