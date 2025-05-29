@@ -58,20 +58,6 @@
     } */
 
 
-      .carousel {
-        width: 100%;
-        margin: 40px auto;
-        /* background-color: #f0f4f8; */
-      }
-      .carousel-item {
-        width: 50% !important;
-        height: 75% !important;
-      }
-      .carousel-item img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-      }
 
 
 
@@ -149,34 +135,78 @@
       margin: 0;
     }
 
+  
+
+  .slider .indicators {
+    /* bottom: 50px !important; */
+    z-index: 10;
+    position: absolute;
+    margin: 0; /* prevent extra spacing */
+    padding: 0;
+    height: auto;
+    margin-bottom: 0 !important;
+  }
+
+  .slider .indicators li {
+    background-color: rgba(255, 255, 255, 0.6); /* light dots */
+  }
+
+  .slider .indicators .indicator-item.active {
+    background-color: #2196f3; /* active dot color */
+  }
+
+.slider-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+}
+
+.slider .slider-btn {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.slider .slider-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
     @media (max-width: 1200px) {
-        .carousel-item {
+        /* .carousel-item {
             width: 45% !important;
-        }
+        } */
     }
 
     @media (max-width: 1000px) {
-        .carousel-item {
+        /* .carousel-item {
             width: 40% !important;
-        }
+        } */
     }
 
     @media (max-width: 800px) {
-        .carousel-item {
+        /* .carousel-item {
             width: 35% !important;
-        }
+        } */
     }
 
     @media (min-width: 1600px) {
-        .carousel-item {
+        /* .carousel-item {
             width: 55% !important;
-        }
+        } */
     }
 
     @media (min-width: 1800px) {
-        .carousel-item {
+        /* .carousel-item {
             width: 60% !important;
-        }
+        } */
     }
 </style>
 {%endblock%}
@@ -195,13 +225,28 @@
     <p>Put description here about what the store would eb about or maybe a business memo/ memorandum.</p>
   </section>
 
-    <div class="carousel" data-aos="fade-up" data-aos-delay="300" style="width: 100%;">
+    <!-- <div class="carousel" data-aos="fade-up" data-aos-delay="300" style="width: 100%;">
         <a class="carousel-item" href="#one!"><img src="/static/landingPageImages/asus.jpg" alt="Local image not found"></a>
         <a class="carousel-item" href="#two!" ><img src="/static/landingPageImages/background.jpg"></a>
         <a class="carousel-item" href="#three!" ><img src="/static/landingPageImages/zidane.jpg"></a>
         <a class="carousel-item" href="#four!" ><img src="/static/landingPageImages/lowHeart.jpg"></a>
         <a class="carousel-item" href="#five!" ><img src="/static/landingPageImages/Ship2.jpg" style="width:fit-container"></a>
         <a class="carousel-item" href="#six!" ><img src="/static/landingPageImages/Alien_ship.jpg"></a>
+    </div> -->
+
+    <div class="slider" data-aos="fade-up" data-aos-delay="300">
+      <ul class="slides">
+        <li><img src="/static/landingPageImages/asus.jpg"></li>
+        <li><img src="/static/landingPageImages/background.jpg"></li>
+        <li><img src="/static/landingPageImages/zidane.jpg"></li>
+        <li><img src="/static/landingPageImages/lowHeart.jpg"></li>
+        <li><img src="/static/landingPageImages/Ship2.jpg"></li>
+        <li><img src="/static/landingPageImages/Alien_ship.jpg"></li>
+      </ul>
+      <div class="slider-controls">
+        <button class="slider-btn prev">&#10094;</button>
+        <button class="slider-btn next">&#10095;</button>
+      </div>
     </div>
 
   <div class="products-container" data-aos="fade-in" data-aos-delay="600">
@@ -249,23 +294,24 @@
 {% block script %}
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.carousel');
-        var instances = M.Carousel.init(elems, {
-        });
-
-        //Auto scroll on carousel, change the time to shorten or lengthen it, rn. its 10 seconds (10000 ms)
-        setInterval(function () {
-        instances.forEach(instance => instance.next());
-        }, 10000);
-
-        window.addEventListener('resize', () => {
-
-            instances.forEach(instance => instance.destroy());
-
-            instances = M.Carousel.init(document.querySelectorAll('.carousel'), {
-            });
-        });
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems, {
+      indicators: false,
+      height: 600,
+      interval: 4000,
     });
+
+    const prevBtn = document.querySelector('.slider .prev');
+    const nextBtn = document.querySelector('.slider .next');
+
+    prevBtn.addEventListener('click', () => {
+      instances[0].prev();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      instances[0].next();
+    });
+  });
 </script>
 {% endblock %}
