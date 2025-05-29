@@ -5,7 +5,14 @@
 {% block style %}
 <style>
     
-
+    .order-status {
+        font-weight: bold;
+        padding-left: 10px;
+        margin-left:auto !important;
+    }
+    .order-item {
+        margin-bottom: 10px;
+    }
 
 </style>
 {%endblock%}
@@ -20,7 +27,7 @@
 
 {%block content%}
  
-<p>Orders page goes here</p>
+<!-- <p>Orders page goes here</p>
 
 <div>
     {%if orders%}
@@ -31,12 +38,60 @@
     {%else%}
         <p>NO ORDERS YET.</p>
     {%endif%}
+</div> -->
+
+<div class="order-container">
+    <h4 class="center-align">My Orders</h4>
+
+    {% if orders %}
+    <ul class="collapsible popout">
+        {% for order in orders %}
+        <li>
+            <div class="collapsible-header">
+                <span>Order #{{ order.ID }}</span>
+                <span class="order-status {{ 'green-text' if order.status == 'Paid' else 'red-text' if order.status == 'Cancelled' else 'orange-text' }}">
+                    {{ order.status }}
+                </span>
+            </div>
+            <div class="collapsible-body">
+                {%if order.status == "Pending" %}
+                    <a href="/resume_payment/{{order.ID}}"><div>Resume Payment </div></a>
+                {%endif%}
+                <p><strong>Placed:</strong> {{ order.created_at }}</p>
+
+                <div>
+                    <h6>Items:</h6>
+                    <ul class="collection">
+                        {% for item in order.items %}
+                        <li class="collection-item">
+                            <p>{{ item.product_name }} — Qty: {{ item.order_quantity }}</p>
+                            {% if item.price %}
+                            <span class="right">${{ item.price }}</span>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% if order.total_amount %}
+                <p><strong>Total:</strong> ${{ order.total_amount }}</p>
+                {% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="center-align">You have not placed any orders yet.</p>
+    {% endif %}
 </div>
 
 {%endblock%}
 
 {% block script %}
 <script>
-
+    document.addEventListener('DOMContentLoaded', function () {
+        const elems = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(elems);
+    });
 </script>
 {% endblock %}

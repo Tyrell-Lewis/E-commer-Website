@@ -10,7 +10,7 @@ from App.controllers import(
     add_item_to_cart, remove_item_from_cart, update_item_in_cart,
     get_customer_cart, get_customer_cart_id, get_cart_by_id, 
     get_customer_by_id,
-    create_order, update_order, get_all_orders
+    create_order, update_order, get_all_orders, get_order_by_id
 )
 
 order_views = Blueprint('order_views',
@@ -64,18 +64,24 @@ def create_checkout_session():
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://8080-tyrelllewis-ecommerwebs-f5wt4kkx8hb.ws-us120.gitpod.io//success',
-        cancel_url='https://8080-tyrelllewis-ecommerwebs-f5wt4kkx8hb.ws-us120.gitpod.io/cancel',
+        success_url='https://8080-tyrelllewis-ecommerwebs-c3mcydidp3n.ws-us120.gitpod.io/success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-c3mcydidp3n.ws-us120.gitpod.io/cancel',
     )
 
+    #in addition to making the cart items dynamic, also pass the items for the order into this function so you can get it later for the order history.
     create_order(customer_id=customer_id, total_amount=total_amount, 
         stripe_session_id=checkout_session.id,
         stripe_payment_intent=checkout_session.payment_intent,
-        status='pending'
+        status='Pending'
     )
 
     return redirect(checkout_session.url)
 
+@order_views.route('/resume_payment/<int:order_id>', methods=['GET'])
+def resume_payment(order_id):
+    order = get_order_by_id(order_id)
+    checkout_session = stripe.checkout.Session.retrieve(order.stripe_session_id)
+    return redirect(checkout_session.url)
 
 @order_views.route('/webhook/stripe', methods=['POST'])
 def stripe_webhook():
@@ -95,8 +101,14 @@ def stripe_webhook():
     if event['type'] == 'checkout.session.completed':
         checkout_session = event['data']['object']
         checkout_session_id = checkout_session.get('id')
-
+        print("In paid")
         #Current user does not work here, because this call is made remotely from stripe, not taking into account 
-        update_order(stripe_session_id=checkout_session_id)
+        update_order(stripe_session_id=checkout_session_id, status='Paid')
+    elif event['type'] == 'checkout.session.expired':
+        checkout_session = event['data']['object']
+        checkout_session_id = checkout_session.get('id')
+        print("In cancelled")
+        update_order(stripe_session_id=checkout_session_id, status='Cancelled')
+
 
     return jsonify({'status': 'success'})

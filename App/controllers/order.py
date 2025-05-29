@@ -68,7 +68,7 @@ def create_order (customer_id, total_amount, status, stripe_session_id, stripe_p
         return None
 
 
-def update_order (stripe_session_id):
+def update_order (stripe_session_id, status):
 
     try:
         # existing_customer = get_customer_by_id(customer_id)
@@ -78,7 +78,7 @@ def update_order (stripe_session_id):
 
         existing_order = Order.query.filter_by(stripe_session_id=stripe_session_id).first()
         if existing_order:
-            existing_order.status = 'paid'
+            existing_order.status = status
             db.session.commit()
             return existing_order
         else:

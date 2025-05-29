@@ -4,9 +4,37 @@
 
 {% block style %}
 <style>
-    
+  .favourites-container {
+    padding: 2rem 1rem;
+  }
 
+  .favourite-card {
+    /* transition: box-shadow 0.3s ease; */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
 
+  .favourite-card:hover {
+    /* box-shadow: 0px 4px 10px rgba(0,0,0,0.2); */
+    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 30px 30px rgba(0,0,0,0.25);
+  }
+
+  .card-image img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .remove-btn {
+    margin-top: 10px;
+  }
+
+  .empty-state {
+    text-align: center;
+    margin-top: 5rem;
+    color: #9e9e9e;
+  }
 </style>
 {%endblock%}
 
@@ -20,17 +48,40 @@
 
 {%block content%}
  
-<p>favourites page goes here</p>
+<div class="favourites-container">
 
-<div>
-    {%if favourites%}
-        {% for favourite in favourites%}
-        <p>Name: {{favourite.product.name}} </p>
+  <h4 class="center-align">Your Favourites</h4>
 
-        {%endfor%}
-    {%else%}
-        <p>NO FAVOURITES YET.</p>
-    {%endif%}
+  {% if favourites %}
+    <div class="row">
+      {% for favourite in favourites %}
+        <div class="col s12 m6 l4"> <!-- Materialize always uses a 12 column grid, sot he s12, m6 and l4 just tells us how much space it should take up on different screens -->
+          <div class="card favourite-card">
+            <div class="card-image">
+              <img src="{{favourite.product.picture}} " alt="{{ favourite.product.name }}">
+              <span class="card-title black-text">{{ favourite.product.name }}</span>
+            </div>
+            <div class="card-content">
+              <p>{{ favourite.product.description or "No description available." }}</p>
+            </div>
+            <div class="card-action">
+              <a href="/product/{{favourite.product.ID}}" class="blue-text">View Details</a>
+              <form action="/toggleFavourites/{{favourite.product.ID}}" method="POST" style="display:inline;">
+                <button type="submit">Toggle favourites</button>
+             </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h5>No favourites yet.</h5>
+      <p>Start exploring and add items you love!</p>
+      <a href="/Home" class="btn blue">Browse Products</a>
+    </div>
+  {% endif %}
+
 </div>
 
 {%endblock%}
