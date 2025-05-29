@@ -96,6 +96,7 @@
   <p>Feel free to take all of this out, just here so you know what variables to use if you need them</p>
   {%if items%}
       {%for item in items%}
+        <button><a href="/product/{{item.ID}}" class="blue-text">View Details</a></button>
         <form action="/toggleFavourites/{{item.ID}}" method="POST" style="display:inline;">
             <button type="submit">Toggle favourites</button>
         </form>

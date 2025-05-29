@@ -5,7 +5,33 @@
 {% block style %}
 <style>
     
+  .product-page-container {
+    padding: 40px 20px;
+  }
 
+  .product-image {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .product-details {
+    padding: 20px;
+  }
+
+  .in-stock {
+    color: green;
+    font-weight: bold;
+  }
+
+  .out-of-stock {
+    color: red;
+    font-weight: bold;
+  }
+
+  .add-to-cart-btn {
+    margin-top: 20px;
+  }
 
 </style>
 {%endblock%}
@@ -20,7 +46,7 @@
 
 {%block content%}
  
-<p>Product page goes here</p>
+<!-- <p>Product page goes here</p>
 
 <div>
     {%if item%}
@@ -29,6 +55,35 @@
     {%else%}
         <p>You shouldnt see this, at all ......</p>
     {%endif%}
+</div> -->
+
+<div class="product-page-container">
+  {% if item %}
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col s12 m6">
+      <img src="{{item.picture}}" alt="{{ item.name }}" class="product-image">
+    </div>
+
+    <!-- Product Info -->
+    <div class="col s12 m6 product-details">
+      <h4>{{ item.name }}</h4>
+      <p><strong>Price:</strong> ${{ item.price }}</p>
+      <p><strong>Description: {{ item.description }}</strong></p>
+
+      {% if item.availability == True %}
+      <p>Its in stock so this works</p>
+        <p class="in-stock">In Stock</p>
+        <button class="btn green add-to-cart-btn" type="submit"><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
+      {% else %}
+      <p>Its NOTTTT stock so this works</p>
+        <p class="out-of-stock">Out of Stock</p>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+    <p>You shouldn't see this, at all ......</p>
+  {% endif %}
 </div>
 
 {%endblock%}
