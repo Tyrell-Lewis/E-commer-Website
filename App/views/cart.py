@@ -17,6 +17,7 @@ Page/Action Routes
 '''
 
 @cart_views.route("/cartPage", methods=["GET"])
+@login_required
 def cart_page():
     cart_id = get_customer_cart_id(current_user.get_id())
 
@@ -26,6 +27,7 @@ def cart_page():
     return render_template("cartPage.html", cart=cart, customer=customer)
 
 @cart_views.route("/addToCart/<int:item_id>", methods=["GET"])
+@login_required
 def add_to_cart_action(item_id):
     # customer = current_user.get_id()
     cart_id = get_customer_cart_id(current_user.get_id())
@@ -39,6 +41,7 @@ def add_to_cart_action(item_id):
 
 
 @cart_views.route("/removeFromCart/<int:item_id>", methods=["GET"])
+@login_required
 def remove_from_cart_action(item_id):
     # customer = current_user.get_id()
     cart_id = get_customer_cart_id(current_user.get_id())
@@ -53,6 +56,7 @@ def remove_from_cart_action(item_id):
 
 
 @cart_views.route("/updateInCart/<int:item_id>", methods=["GET"])
+@login_required
 def update_item_cart_action(item_id):
     # customer = current_user.get_id()
     cart_id = get_customer_cart_id(current_user.get_id())

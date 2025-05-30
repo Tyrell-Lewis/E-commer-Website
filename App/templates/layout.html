@@ -619,8 +619,31 @@
                 <input type="text" id="searchInput" placeholder="Search...">
                 <div id="searchResults" class="dropdown-results"></div>
             </div>
+            
+            <!-- <a href="/cartPage"><div title="Make an icon, and just has the items added to the cart" style="padding-right: 20px;"> Cart</div></a> -->
 
-            <a href="/cartPage"><div title="Make an icon, and just has the items added to the cart" style="padding-right: 20px;"> Cart</div></a>
+            <a href="/cartPage" style="position: relative; padding-right: 20px;">
+  <i class="fas fa-shopping-cart fa-lg" style="width: fit-content; height:fit-content;"></i>
+  {% if cart_count > 0 %}
+                <span style="
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: red;
+  color: white;
+  font-size: 0.7rem;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+">
+      {{ cart_count }}
+    </span>
+  {% endif %}
+</a>
 
             <!-- Profile Options -->
             <div class="profile-container">
@@ -691,12 +714,20 @@
                 
                 <div class="col s12 m6">
                     <h6 class="white-text">Sitemap</h6>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="/Home">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="/allProducts">Product Catalog</a></li>
-                        <li><a class="grey-text text-lighten-3" href="/favourites">Favourites</a></li>
-                        <li><a class="grey-text text-lighten-3" href="/ordersPage">Order History</a></li>
-                    </ul>
+
+                    {%if current_user.is_authenticated%}
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="/Home">Home</a></li>
+                            <li><a class="grey-text text-lighten-3" href="/allProducts">Product Catalog</a></li>
+                            <li><a class="grey-text text-lighten-3" href="/favourites">Favourites</a></li>
+                            <li><a class="grey-text text-lighten-3" href="/ordersPage">Order History</a></li>
+                        </ul>
+                    {%else%}
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="/Home">Home</a></li>
+                            <li><a class="grey-text text-lighten-3" href="/allProducts">Product Catalog</a></li>
+                        </ul>
+                    {%endif%}
                 </div>
 
                 <div class="col s12 m6">

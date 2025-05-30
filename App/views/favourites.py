@@ -25,12 +25,14 @@ Page/Action Routes
 '''
 
 @favourite_views.route("/favourites", methods=["GET"])
+@login_required
 def favourites_page():
     favourites = get_favourite_products(current_user.get_id())
     print(f'The favourites are: {favourites}')
     return render_template("favouritesPage.html", favourites=favourites)
 
 @favourite_views.route("/toggleFavourites/<int:item_id>", methods=["POST"])
+@login_required
 def toggle_favourites(item_id):
     toggle_favourite_product(customer_id=current_user.get_id(), product_id=item_id)
     return redirect (request.referrer)

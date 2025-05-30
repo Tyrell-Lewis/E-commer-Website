@@ -17,6 +17,7 @@ Page/Action Routes
 
 
 @customer_views.route("/profile", methods=["GET"])
+@login_required
 def profile_page():
     
     return render_template("profilePage.html")

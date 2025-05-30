@@ -17,8 +17,6 @@ from App.controllers import (setup_jwt, setup_flask_login)
 from App.views import views
 
 # from flask_session import Session 
-
-
  
 
 def add_views(app):
@@ -236,5 +234,16 @@ def create_app(config_overrides={}):
   #   from App.database import db
   #   if not Student.query.first() and not Staff.query.first() and not Review.query.first():
   #     populate_database()
+
+  @app.context_processor
+  def inject_cart_count():
+      if current_user.is_authenticated:
+          # Example: assume `current_user.cart` is a relationship or method that returns the user's cart items
+          cart = current_user.customerCart  # could also be a method like current_user.get_cart_items()
+          cart_count = len(cart.items)
+      else:
+          cart_count = 0
+
+      return {'cart_count': cart_count}
  
   return app

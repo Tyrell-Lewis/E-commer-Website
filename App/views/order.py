@@ -21,6 +21,7 @@ Page/Action Routes
 '''
 
 @order_views.route("/ordersPage", methods=["GET"])
+@login_required
 def orders_page():
     orders = get_all_orders(current_user.get_id())
     print(f'The orders are: {orders}')
@@ -32,6 +33,7 @@ def checkout_success():
     return render_template("success.html")
 
 @order_views.route("/cancel", methods=["GET"])
+
 def checkout_cancel():
 
     return render_template("cancel.html")
@@ -39,6 +41,7 @@ def checkout_cancel():
 
 
 @order_views.route('/checkout', methods=['POST'])
+@login_required
 def create_checkout_session():
 
     #For right now, i hard encoded the data, i will make this dynamic to work with the data in
@@ -78,12 +81,14 @@ def create_checkout_session():
     return redirect(checkout_session.url)
 
 @order_views.route('/resume_payment/<int:order_id>', methods=['GET'])
+@login_required
 def resume_payment(order_id):
     order = get_order_by_id(order_id)
     checkout_session = stripe.checkout.Session.retrieve(order.stripe_session_id)
     return redirect(checkout_session.url)
 
 @order_views.route('/webhook/stripe', methods=['POST'])
+@login_required
 def stripe_webhook():
     payload = request.data
     sig_header = request.headers.get('Stripe-Signature')
