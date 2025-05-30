@@ -41,7 +41,6 @@ def checkout_cancel():
 
 
 @order_views.route('/checkout', methods=['POST'])
-@login_required
 def create_checkout_session():
 
     #For right now, i hard encoded the data, i will make this dynamic to work with the data in
@@ -67,8 +66,8 @@ def create_checkout_session():
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://8080-tyrelllewis-ecommerwebs-c3mcydidp3n.ws-us120.gitpod.io/success',
-        cancel_url='https://8080-tyrelllewis-ecommerwebs-c3mcydidp3n.ws-us120.gitpod.io/cancel',
+        success_url='https://8080-tyrelllewis-ecommerwebs-f76gwd6acti.ws-us120.gitpod.io/success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-f76gwd6acti.ws-us120.gitpod.io/cancel',
     )
 
     #in addition to making the cart items dynamic, also pass the items for the order into this function so you can get it later for the order history.
@@ -81,14 +80,12 @@ def create_checkout_session():
     return redirect(checkout_session.url)
 
 @order_views.route('/resume_payment/<int:order_id>', methods=['GET'])
-@login_required
 def resume_payment(order_id):
     order = get_order_by_id(order_id)
     checkout_session = stripe.checkout.Session.retrieve(order.stripe_session_id)
     return redirect(checkout_session.url)
 
 @order_views.route('/webhook/stripe', methods=['POST'])
-@login_required
 def stripe_webhook():
     payload = request.data
     sig_header = request.headers.get('Stripe-Signature')
