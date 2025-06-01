@@ -40,7 +40,7 @@ def product_page(item_id):
 @item_views.route("/allProducts/<string:c_type>", methods=["GET"])
 def all_products_page(c_type=None):
 
-    valid_types = ['t-shirt', 'pants', 'shoes']
+    valid_types = ['t-shirt', 'pants', 'shoes', 'hoodies']
     
     if c_type in valid_types:
         items = get_all_items_by_type(c_type)

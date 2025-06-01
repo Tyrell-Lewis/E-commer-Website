@@ -43,7 +43,7 @@ def add_to_cart_action(item_id):
     return redirect(request.referrer)
 
 
-@cart_views.route("/removeFromCart/<int:item_id>", methods=["GET"])
+@cart_views.route("/removeFromCart/<int:item_id>", methods=["POST"])
 @login_required
 def remove_from_cart_action(item_id):
     # customer = current_user.get_id()

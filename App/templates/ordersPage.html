@@ -45,9 +45,9 @@
             </div>
             <div class="collapsible-body">
                 {%if order.status == "Pending" %}
-                    <a href="/resume_payment/{{order.ID}}"><div>Resume Payment </div></a>
+                    <a href="/resume_payment/{{order.ID}}" class="btn blue">Resume Checkout</a>
                 {%endif%}
-                <p><strong>Placed:</strong> {{ order.created_at }}</p>
+                <p><strong>Checkout Placed at:</strong> {{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
 
                 <div>
                     <h6>Items:</h6>

@@ -10,7 +10,8 @@ from App.controllers import(
     add_item_to_cart, remove_item_from_cart, update_item_in_cart,
     get_customer_cart, get_customer_cart_id, get_cart_by_id, 
     get_customer_by_id,
-    create_order, update_order, get_all_orders, get_order_by_id
+    create_order, update_order, get_all_orders, get_order_by_id,
+    check_stock
 )
 
 order_views = Blueprint('order_views',
@@ -29,7 +30,11 @@ def orders_page():
 
 @order_views.route("/success", methods=["GET"])
 def checkout_success():
+    cart_id = get_customer_cart_id(current_user.get_id())
+    cart = get_cart_by_id(cart_id)
 
+    for item in cart.items:
+        remove_item_from_cart(item_id=item.product.ID, cart_id=cart_id, customer_id=current_user.get_id())
     return render_template("success.html")
 
 @order_views.route("/cancel", methods=["GET"])
@@ -57,6 +62,7 @@ def create_checkout_session():
     total_amount = 0
 
     for x in range(len(product_ids)):
+        product_id = product_ids[x]
         name = product_names[x]
         quantity = int(quantities[x])
         unit_price = int(prices[x])
@@ -66,14 +72,13 @@ def create_checkout_session():
                     'currency': 'usd',
                     'unit_amount': unit_price,
                     'product_data': {
-                        'name': name,
+                        'name': product_id, #Done this way because stripe has its own product catalog, which is not quite necessary for this demo website.
+                        'description': name,
                     },
                 },
                 'quantity': quantity,
             })
         total_amount = total_amount + (quantity * (unit_price / 100))
-
-        total_amount = 29.99
 
     # Create Stripe checkout session, just follow the stripe docs to make this and append to it in future.
     #Gitpod changes the url on new workspaces, so on erros, change these urls to match, and also change the stripe webhook destination to match.
@@ -81,17 +86,16 @@ def create_checkout_session():
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://tyrelllewis-ecommerwebs-uyobk99u90l.ws-us120.gitpod.io/success',
-        cancel_url='https://tyrelllewis-ecommerwebs-uyobk99u90l.ws-us120.gitpod.io/cancel',
+        success_url='https://8080-tyrelllewis-ecommerwebs-54yckiri9sl.ws-us120.gitpod.io/success',
+        cancel_url='https://8080-tyrelllewis-ecommerwebs-54yckiri9sl.ws-us120.gitpod.io/cancel',
     )
 
     #in addition to making the cart items dynamic, also pass the items for the order into this function so you can get it later for the order history.
     create_order(customer_id=customer_id, total_amount=total_amount, 
         stripe_session_id=checkout_session.id,
         stripe_payment_intent=checkout_session.payment_intent,
-        status='Pending'
+        status='Pending', line_items=line_items
     )
-
     return redirect(checkout_session.url)
 
 @order_views.route('/resume_payment/<int:order_id>', methods=['GET'])
@@ -120,7 +124,14 @@ def stripe_webhook():
         checkout_session_id = checkout_session.get('id')
         print("In paid")
         #Current user does not work here, because this call is made remotely from stripe, not taking into account 
-        update_order(stripe_session_id=checkout_session_id, status='Paid')
+
+        status = check_stock(stripe_session_id=checkout_session_id)
+
+        if status is True:
+            update_order(stripe_session_id=checkout_session_id, status='Paid')
+        else:
+            stripe.Refund.create(payment_intent=checkout_session['payment_intent'])
+            update_order(stripe_session_id=checkout_session_id, status='Refunded - Out of Stock')
     elif event['type'] == 'checkout.session.expired':
         checkout_session = event['data']['object']
         checkout_session_id = checkout_session.get('id')

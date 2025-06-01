@@ -130,6 +130,7 @@
                 <p>{{ item.description[:30] }}{% if item.description|length > 30 %}...{% endif %}</p>
                 <P>Clothing Type: {{item.clothing_type}} </P>
                 <P>Size: {{item.size}} </P>
+                <P>Stock: {{item.stock}} Remove after testing</P>
                 {% if item.availability == True %}
                   <p class="in-stock">In Stock</p>
                 {% else %}

@@ -892,7 +892,7 @@
                             <h3>${p.name}</h3>
                             <p class="type-price">
                                 <span class="product-type">${p.clothing_type || 'N/A'}</span> | 
-                                <span class="product-price">$${p.price.toFixed(2)}</span>
+                                <span class="product-price">$${p.price / 100}</span>
                             </p>
                             </div>
                             <img src="${p.picture}" alt="${p.name}" class="product-thumb" />

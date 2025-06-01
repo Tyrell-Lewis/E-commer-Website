@@ -38,7 +38,7 @@ def sell_item(item_id, quantity):
                 if existing_item.stock <= 0:
                     existing_item.stock = 0
                     existing_item.availability = False
-                db.session.add(existing_item)
+                # db.session.add(existing_item)
                 db.session.commit()
                 return True
             else:
