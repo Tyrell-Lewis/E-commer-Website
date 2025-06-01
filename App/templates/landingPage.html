@@ -220,9 +220,9 @@
 
 {%block content%}
   <section class="banner" data-aos="fade-down" data-aos-duration="800">
-    <img data-aos="flip-left" data-aos-delay="300" style="border-radius: 10px;margin-top: 0%;"src="https://i.ibb.co/RGj6Jd38/Chat-GPT-Image-May-30-2025-04-20-42-PM.png" alt="Chat-GPT-Image-May-30-2025-04-20-42-PM">
-    <h1>LognLogin - Login to Unlimited Possibilities</h1>
-    <p>We’re a lean team of devs who cut through the noise to build sleek, scalable solutions with log(n) efficiency and enterprise-grade polish. No bloated docs, no unnecessary overhead — just sharp design, clean UX, and fast, production-ready code. Whether you're launching a product, refining a platform, or solving a tough tech problem, we deliver elegant outcomes at the speed of thought. Smart, fast, and unapologetically minimal — that’s the LognLogin way.
+    <!-- <img data-aos="flip-left" data-aos-delay="300" style="border-radius: 10px;margin-top: 0%;"src="https://i.ibb.co/RGj6Jd38/Chat-GPT-Image-May-30-2025-04-20-42-PM.png" alt="Chat-GPT-Image-May-30-2025-04-20-42-PM"> -->
+    <h1>LognShop</h1>
+    <p>At LognShop, we bring log(n) speed and minimalism to e-commerce. Whether you're launching your first product or scaling a full catalog, we make it seamless. Blazing-fast setup, intuitive design, and zero fluff — just everything you need to get your store live, fast.
 
 </p>
   </section>
@@ -246,6 +246,9 @@
     <div class="row">
       {% if items %}
         {% for item in items %}
+
+
+
           <div class="col s12 m4 l3">
             <div class="card">
               <div class="card-image">
@@ -268,7 +271,13 @@
               </div>
               <div class="card-action">
                 <form action="/toggleFavourites/{{ item.ID }}" method="POST" style="display:inline;">
-                  <button type="submit" class="btn-small blue lighten-2">Add to Favourites</button>
+                  <button type="submit" class="btn-flat" style="padding: 0; margin: 0; background: none; border: none;" title="Toggle Favourites">
+                    {% if item.ID in favourite_ids %}
+                      <i class="fas fa-bookmark blue-text text-darken-2" style="font-size: 24px;"></i>
+                    {% else %}
+                      <i class="far fa-bookmark blue-text text-darken-2" style="font-size: 24px;"></i>
+                    {% endif %}
+                  </button>
                 </form>
                 <a href="/addToCart/{{ item.ID }}" class="btn-small green">Add to Cart</a>
               </div>

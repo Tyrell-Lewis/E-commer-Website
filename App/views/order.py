@@ -66,8 +66,8 @@ def create_checkout_session():
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url='https://8080-tyrelllewis-ecommerwebs-f76gwd6acti.ws-us120.gitpod.io/success',
-        cancel_url='https://8080-tyrelllewis-ecommerwebs-f76gwd6acti.ws-us120.gitpod.io/cancel',
+        success_url='https://tyrelllewis-ecommerwebs-uyobk99u90l.ws-us120.gitpod.io/success',
+        cancel_url='https://tyrelllewis-ecommerwebs-uyobk99u90l.ws-us120.gitpod.io/cancel',
     )
 
     #in addition to making the cart items dynamic, also pass the items for the order into this function so you can get it later for the order history.

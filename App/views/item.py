@@ -5,7 +5,7 @@ from sqlalchemy import or_
 
 from App.models import Customer, User, Product #,  Staff, Review
 from App.controllers import (
-    sell_item, get_all_items, get_item_by_id, get_all_items_by_type
+    sell_item, get_all_items, get_item_by_id, get_all_items_by_type, get_favourite_products
 )
 
 
@@ -21,7 +21,9 @@ def index_page():
     flash(f"Message pop up works!")
 
     items = get_all_items()
-    return render_template("landingPage.html", items=items)
+    favourites = get_favourite_products(current_user.get_id())
+    favourite_ids = set(f.productID for f in favourites)
+    return render_template("landingPage.html", items=items, favourite_ids=favourite_ids)
 
 
 @item_views.route("/product/<int:item_id>", methods=["GET"])
