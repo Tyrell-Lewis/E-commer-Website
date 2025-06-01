@@ -49,3 +49,25 @@ def create_cart(customer_id):
         db.session.rollback()
         return None
 
+def set_cart_price(cart_id):
+
+    try:
+        cart = get_cart_by_id(cart_id)
+
+        if not cart:
+            return None
+
+        price = 0
+
+        for item in cart.items:
+            price = price + (item.product.price * item.cart_quantity)
+        
+        cart.cartPrice = price
+        db.session.commit()
+        return True
+    except SQLAlchemyError as e:
+        print(f'[DB_ERROR] set_cart_price: {e}')
+        db.session.rollback()
+        return None
+    
+    

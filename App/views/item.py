@@ -22,7 +22,10 @@ def index_page():
 
     items = get_all_items()
     favourites = get_favourite_products(current_user.get_id())
-    favourite_ids = set(f.productID for f in favourites)
+    if favourites is not None:
+        favourite_ids = set(f.productID for f in favourites)
+    else:
+        favourite_ids = []
     return render_template("landingPage.html", items=items, favourite_ids=favourite_ids)
 
 

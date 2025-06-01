@@ -53,8 +53,17 @@
           <p><strong>Quantity:</strong> {{ item.cart_quantity }}</p>
         </div>
         <div class="card-action">
-          <a href="/removeFromCart/{{item.productID}}" class="btn red remove-btn">Remove</a>
-          <a href="/updateInCart/{{item.productID}}" class="btn blue lighten-1">Update</a>
+         <div style="display: flex; align-items: center; gap: 10px;">
+          <form method="POST" action="/updateInCart/{{item.productID}}" style="display: flex; align-items: center; gap: 5px;">
+            <input name="itemQuantity" type="number" min="1" max="{{item.product.stock}}" required
+                  style="width: 70px; padding: 5px;">
+            <button type="submit" class="btn blue lighten-1">Update Quantity</button>
+          </form>
+
+          <form method="POST" action="/removeFromCart/{{item.productID}}">
+            <button type="submit" class="btn red lighten-1">Remove</button>
+          </form>
+        </div>
         </div>
       </div>
       {% endfor %}
@@ -64,7 +73,7 @@
       <div class="card cart-summary">
         <div class="card-content">
           <span class="card-title">Order Summary</span>
-          <p><strong>Cart ID:</strong> {{ cart.ID }}</p>
+          <p>{{current_user.username}}'s Cart</p>
           <ul class="collection">
             {% for item in cart.items %}
             <li class="collection-item">
@@ -95,7 +104,7 @@
   {% else %}
     <div class="empty-state">
       <h5>No Items yet.</h5>
-      <p>Start exploring and add items you love!</p>
+      <p>Start exploring and add the items you love now !</p>
       <a href="/Home" class="btn blue">Browse Products</a>
     </div>
   {% endif %}

@@ -55,14 +55,16 @@
     <div class="col s12 m6 product-details">
       <h4>{{ item.name }}</h4>
       <p><strong>Price:</strong> ${{ item.price }}</p>
+      <p><strong>Brand: {{ item.brand }}</strong></p>
       <p><strong>Description: {{ item.description }}</strong></p>
+      <p><strong>Clothing Type: {{ item.clothing_type }}</strong></p>
+      <p><strong>Size: {{ item.size }}</strong></p>
+      <p><strong>Available Colours: {{ item.colour }}</strong></p>
 
       {% if item.availability == True %}
-      <p>Its in stock so this works</p>
         <p class="in-stock">In Stock</p>
-        <button class="btn green add-to-cart-btn" type="submit"><a href="/addToCart/{{item.ID}}">Add to cart here</a></button>
+        <button class="btn green add-to-cart-btn" type="submit"><a href="/addToCart/{{item.ID}}">Add to cart</a></button>
       {% else %}
-      <p>Its NOTTTT stock so this works</p>
         <p class="out-of-stock">Out of Stock</p>
       {% endif %}
     </div>

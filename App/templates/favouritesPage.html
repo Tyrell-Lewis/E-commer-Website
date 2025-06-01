@@ -66,8 +66,11 @@
             </div>
             <div class="card-action">
               <a href="/product/{{favourite.product.ID}}" class="blue-text">View Details</a>
+              {% if favourite.product.availability == True %}
+                  <a href="/addToCart/{{favourite.product.ID}}" class="btn-small green">Add to Cart</a>
+                {% endif %}
               <form action="/toggleFavourites/{{favourite.product.ID}}" method="POST" style="display:inline;">
-                <button type="submit">Toggle favourites</button>
+                <button type="submit" class="btn blue">Remove</button>
              </form>
             </div>
           </div>

@@ -62,7 +62,7 @@
 
 
       .products-container{
-        background-color: #f0f4f8;
+        background-color: #E5DADA;
       }
 
       .product-catalog {
@@ -245,10 +245,7 @@
   <div class="products-container" data-aos="fade-in" data-aos-delay="600">
     <div class="row">
       {% if items %}
-        {% for item in items %}
-
-
-
+        {% for item in items [:4] %}
           <div class="col s12 m4 l3">
             <div class="card">
               <div class="card-image">
@@ -257,17 +254,11 @@
               </div>
               <div class="card-content">
                 <span class="card-title">{{ item.name }}</span>
-                <p>{{item.description}} </p>
                 <p><strong>Price:</strong> ${{ item.price }}</p>
-                <P>Item name: {{item.name}} </P>
                 <P>Item brand: {{item.brand}} </P>
-                <p>{{ item.description[:20] }}{% if item.description|length > 20 %}...{% endif %}</p>
-                <P>Item price: ${{item.price}} </P>
-                <P>Item stock: {{item.stock}} </P>
-                <P>Item colour: {{item.colour}} </P>
-                <P>Item clothing_type: {{item.clothing_type}} </P>
-                <P>Item size: {{item.size}} </P>
-                <p>Item availability: {{item.availability}} </p>
+                <p>{{ item.description[:30] }}{% if item.description|length > 30 %}...{% endif %}</p>
+                <P>Clothing Type: {{item.clothing_type}} </P>
+                <P>Size: {{item.size}} </P>
               </div>
               <div class="card-action">
                 <form action="/toggleFavourites/{{ item.ID }}" method="POST" style="display:inline;">

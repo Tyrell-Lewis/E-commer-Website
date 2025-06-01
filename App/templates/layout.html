@@ -382,7 +382,7 @@
             right: 0;               /* aligned to the right edge of the input */
             min-width: 250px;       /* reasonable min width */
             max-width: 400px;       /* max width for larger screens */
-            background-color: #a3dce4; /* dark navy background */
+            background-color: #b5a5a5; /* dark navy background */
             color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             border-radius: 6px;
@@ -616,34 +616,34 @@
                     <button type="submit">Search</button>
                 </form> -->
 
-                <input type="text" id="searchInput" placeholder="Search...">
+                <input type="text" id="searchInput" placeholder="Search..." style="color:white;">
                 <div id="searchResults" class="dropdown-results"></div>
             </div>
             
             <!-- <a href="/cartPage"><div title="Make an icon, and just has the items added to the cart" style="padding-right: 20px;"> Cart</div></a> -->
 
             <a href="/cartPage" style="position: relative; padding-right: 20px;">
-  <i class="fas fa-shopping-cart fa-lg" style="width: fit-content; height:fit-content;"></i>
-  {% if cart_count > 0 %}
-                <span style="
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: red;
-  color: white;
-  font-size: 0.7rem;
-  height: 18px;
-  width: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-">
-      {{ cart_count }}
-    </span>
-  {% endif %}
-</a>
+                <i class="fas fa-shopping-cart fa-lg" style="width: fit-content; height:fit-content;"></i>
+                {% if cart_count > 0 %}
+                                <span style="
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                background: red;
+                color: white;
+                font-size: 0.7rem;
+                height: 18px;
+                width: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-weight: bold;
+                ">
+                    {{ cart_count }}
+                    </span>
+                {% endif %}
+            </a>
 
             <!-- Profile Options -->
             <div class="profile-container">
@@ -663,9 +663,9 @@
                         </div>
                         {%if current_user.is_authenticated%}
                             <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
-                                <li class="more-menu-item" role="presentation">
+                                <!-- <li class="more-menu-item" role="presentation">
                                     <a href="/profile" class="more-menu-btn" role="menuitem">Profile</a>
-                                </li>
+                                </li> -->
                                 <li class="more-menu-item" role="presentation">
                                     <a href="/favourites" class="more-menu-btn" role="menuitem">Favourites</a>
                                 </li>
@@ -742,7 +742,7 @@
 
                 <div class="row" style="margin-bottom: 0;">
                 <div class="col s12 m8 center-on-small-only white-text center-align">
-                    © Company Name goes here — All rights reserved.
+                    © LognShop — All rights reserved.
                 </div>
                 <div class="col s12 m4 right-align">
                     <span class="white-text">Connect with us:</span>
