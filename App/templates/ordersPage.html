@@ -56,7 +56,7 @@
                         <li class="collection-item">
                             <p>{{ item.product_name }} — Qty: {{ item.order_quantity }}</p>
                             {% if item.price %}
-                            <span class="right">${{ item.price }}</span>
+                            <span class="right">${{ item.price / 100 }}</span>
                             {% endif %}
                         </li>
                         {% endfor %}

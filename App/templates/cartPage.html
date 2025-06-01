@@ -49,7 +49,7 @@
         <div class="card-content">
           <span class="card-title">{{ item.product.name }}</span>
           <p>{{ item.product.description }}</p>
-          <p><strong>Price:</strong> ${{ item.product.price }}</p>
+          <p><strong>Price:</strong> ${{ item.product.price / 100}}</p>
           <p><strong>Quantity:</strong> {{ item.cart_quantity }}</p>
         </div>
         <div class="card-action">
@@ -78,13 +78,13 @@
             {% for item in cart.items %}
             <li class="collection-item">
               {{ item.product.name }} x {{ item.cart_quantity }}
-              <span class="right">${{ item.product.price * item.cart_quantity }}</span>
+              <span class="right">${{ (item.product.price / 100) * item.cart_quantity }}</span>
             </li>
             {% endfor %}
           </ul>
           <p class="right-align">
             <strong>Total:</strong> $
-            {{cart.cartPrice}}
+            {{cart.cartPrice / 100}}
           </p>
         </div>
         <div class="card-action center">

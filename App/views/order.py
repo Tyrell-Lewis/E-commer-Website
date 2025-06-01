@@ -48,20 +48,35 @@ def create_checkout_session():
 
     customer_id = current_user.get_id()
 
-    line_items = [{
-            'price_data': {
-                'currency': 'usd',
-                'unit_amount': 2999,  # in cents is 29.99, Stripe uses integers so its 2999 to represent 29.99
-                'product_data': {
-                    'name': "blue dragon t-shirt",
+    product_ids = request.form.getlist('product_id')
+    product_names = request.form.getlist('product_name')
+    prices = request.form.getlist('price')
+    quantities = request.form.getlist('quantity')
+
+    line_items = []
+    total_amount = 0
+
+    for x in range(len(product_ids)):
+        name = product_names[x]
+        quantity = int(quantities[x])
+        unit_price = int(prices[x])
+
+        line_items.append({
+                'price_data': {
+                    'currency': 'usd',
+                    'unit_amount': unit_price,
+                    'product_data': {
+                        'name': name,
+                    },
                 },
-            },
-            'quantity': 5,
-        }]
-    total_amount = 29.99
+                'quantity': quantity,
+            })
+        total_amount = total_amount + (quantity * (unit_price / 100))
+
+        total_amount = 29.99
 
     # Create Stripe checkout session, just follow the stripe docs to make this and append to it in future.
-    #Gitpod changes the url on new workspaces, so on erros, change these ur;s to mathc, and also change the stripe webhook destination to match.
+    #Gitpod changes the url on new workspaces, so on erros, change these urls to match, and also change the stripe webhook destination to match.
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=line_items,

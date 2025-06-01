@@ -9,7 +9,7 @@ class Product(db.Model):
     colour = db.Column(db.String(120), nullable=True) #Change to allow for multiple colours later, for right now just one.
     size = db.Column(db.String(120), nullable=True)# Change to allow for multiple sizes later, right now just one
     clothing_type = db.Column(db.String(120), nullable=False)# Maybe allow for multiple clothing types, maybe not.
-    price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     availability = db.Column(db.Boolean, default=False)
     stock = db.Column(db.Integer, nullable=True)
     picture = db.Column(db.Text, nullable=True)

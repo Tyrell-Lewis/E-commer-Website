@@ -8,7 +8,7 @@ class Cart(db.Model):
     customerID = db.Column(db.Integer, db.ForeignKey('customer.ID', name='fk_cart_customer',
                                                      ondelete='CASCADE'), unique=True, nullable=False)
     items = db.relationship('CartItem', backref='in_cart', cascade="all, delete-orphan", passive_deletes=True)
-    cartPrice = db.Column(db.Float, nullable=False, default=0.0)
+    cartPrice = db.Column(db.Integer, nullable=False, default=0.0)
 
 
 

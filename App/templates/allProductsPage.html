@@ -125,7 +125,7 @@
               </div>
               <div class="card-content">
                 <span class="card-title">{{ item.name }}</span>
-                <p><strong>Price:</strong> ${{ item.price }}</p>
+                <p><strong>Price:</strong> ${{ item.price / 100 }}</p>
                 <P>Item brand: {{item.brand}} </P>
                 <p>{{ item.description[:30] }}{% if item.description|length > 30 %}...{% endif %}</p>
                 <P>Clothing Type: {{item.clothing_type}} </P>
