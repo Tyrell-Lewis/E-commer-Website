@@ -36,19 +36,6 @@ def get_user(id):
         print("[user.get_user] Error occurred: ", str(e))
         return None
 
-
-# def get_user_student(student):
-#     try:
-#         user = User.query.get(student.ID)
-#         if user:
-#             return user
-#         else:
-#             return None
-#     except Exception as e:
-#         print("[user.get_user_student] Error occurred: ", str(e))
-#         return None
-
-
 def get_all_users():
     try:
         users = User.query.all()
@@ -152,18 +139,3 @@ def update_password(userID, newPassword):
         db.session.rollback()
         return False
 
-
-# def update_faculty(userID, newFaculty):
-#     try:
-#         user = get_user(userID)
-#         if user:
-#             user.faculty = newFaculty
-#             db.session.commit()
-#             return True
-#         else:
-#             print("[user.update_faculty] Error: User not found.")
-#             return False
-#     except Exception as e:
-#         print("[user.update_faculty] Error occurred while updating faculty: ", str(e))
-#         db.session.rollback()
-#         return False

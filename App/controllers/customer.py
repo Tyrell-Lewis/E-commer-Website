@@ -120,29 +120,3 @@ def update_customer_profile(customer_id, firstname, lastname, email, profile_pic
         db.session.rollback()
         raise
 
-
-# def customer_create_drill(customer, name, details, difficulty, category):
-#     try:
-#         if create_drill(customer, name, details, difficulty, category):
-#             return True
-#         else:
-#             return False
-#     except Exception as e:
-#         print("[customer.customer_create_drill] Error occurred while creating drill:", str(e))
-#         return False
-
-
-
-
-
-
-# def get_favourite_drills(customerID):
-#   try:
-#     customer = Customer.query.filter_by(ID=customerID).first()
-#     if customer:
-#         return customer.favouriteDrills
-#     else:
-#         None
-#   except SQLAlchemyError as e:
-#     print(f"[DB ERROR] get_favourite_drills: {e}")
-#     return []

@@ -3,7 +3,7 @@ services:
 - type: web
   name: flask-postgres-api
   env: python
-  repo: https://github.com/Tyrell-Lewis/E-commer-Website.git    
+  repo: https://github.com/Tyrell-Lewis/E-commerce-Website.git    
   plan: free
   branch: main
   healthCheckPath: /healthcheck
