@@ -1,4 +1,4 @@
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/Tyrell-Lewis/E-commerce-Website)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Tyrell-Lewis/E-commerce-Website.git)
 
 
 # E-Commerce Website
